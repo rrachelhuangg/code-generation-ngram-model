@@ -23,7 +23,7 @@ class Record:
         for token in self.dict:
           x -= self.dict[token]
           if x <= 0:
-              return token
+              return token, self.dict[token]/self.total
         return "PIG" #fail state
 
 
@@ -61,7 +61,18 @@ class Model:
     #evaluate and return values used to eval model. Using perplexity, which is confidence of the model. Given a starting window
     #based on the test data, what is the confidence of the next generated token.
     def eval(self):
-        pass
+        count = 0
+        product_probs = 1
+        for method in self.test_data:
+            window = method[0:self.n]
+            if window not in self.lookup_table:
+                continue
+            _, confidence = self.lookup_table[window].predict_next_token()
+            product_probs *= confidence
+            count += 1
+        
+        perplexity = (1/product_probs)**(1/count)
+        return perplexity
 
     def predict(self, context, n = 1000):
         predicted_tokens = context
