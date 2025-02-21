@@ -75,3 +75,16 @@ class Model:
             if count == n:
                 return predicted_tokens
         return predicted_tokens
+    
+    def predict_rand(self, context, n=1000):
+        predicted_tokens = context
+        count = 0
+        while context in self.lookup_table:
+            token = self.lookup_table[context].predict_next_token_rand()
+            predicted_tokens += [token]
+            context = context[1:] + [token]
+            
+            count += 1
+            if count == n:
+                return predicted_tokens
+        return predicted_tokens
