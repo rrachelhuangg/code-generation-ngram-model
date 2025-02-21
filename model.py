@@ -1,4 +1,5 @@
 from random import randint
+from random import shuffle
 
 class Record:
 
@@ -27,10 +28,24 @@ class Model:
     def __init__(self, n : int):
         self.n = n
         self.lookup_table = {} # keys are token lists n-1 long
+        self.train_data = []
+        self.test_data = []
+
+    def set_data(self, tokens : list):
+        methods = []
+        ind = tokens.index("\n")
+        while ind >= 0:
+            methods += [tokens[0:ind]]
+            tokens = tokens[ind + 1:]
+        shuffle(methods)
+
+        split_ind = int(len(methods) * 0.8)
+        self.train_data = methods[0:split_ind]
+        self.test_data  = methods[split_ind:]
 
     #train on a list of tokenized methods
-    def train(self, tokens):
-        for method in tokens:
+    def train(self):
+        for method in self.train_data:
             window = method[0 : self.n-1]
             for token in method[self.n-1:]:
                 if window not in self.lookup_table:
