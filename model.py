@@ -3,10 +3,12 @@ from random import shuffle
 
 class Record:
 
+    ## constructor which instantiates both the records 0 total and empty dict
     def __init__(self):
         self.total = 0
         self.dict = {}
     
+    ## add_token adds a single token to the record, increasing total and expanding dict as necessary
     def add_token(self, token):
         if token in self.dict:
             self.dict[token] += 1
@@ -14,10 +16,12 @@ class Record:
             self.dict[token] = 1
         self.total += 1
 
+    ## the non-random prediction method which returns the most likely following token, as well as the confidence of that token out of all tokens
     def predict_next_token(self):
         max_key = max(self.dict, key=self.dict.get)
         return max_key, self.dict[max_key]/self.total
 
+    ## the random prediction methods which returns a random possible token, as well as the confidence of that token out of all tokens.
     def predict_next_token_rand(self):
         x = randint(0, self.total)
         for token in self.dict:
@@ -29,13 +33,15 @@ class Record:
 
 class Model:
 
+    ## constructor for Model class initialises n of n-gram, the model brain (lookup-table) as well as empty lists for the data partitioning
     def __init__(self, n : int):
         self.n = n
         self.lookup_table = {} # keys are token lists n-1 long
         self.train_data = []
         self.test_data = []
 
-    def set_data(self, tokens : list):
+    ## this method takes a long string of methods separated by "\n" and partitions the data into a split train/test
+    def partition_data(self, tokens : list, train = 0.8):
         methods = []
         ind = tokens.index("\n")
         while ind >= 0:
@@ -43,11 +49,11 @@ class Model:
             tokens = tokens[ind + 1:]
         shuffle(methods)
 
-        split_ind = int(len(methods) * 0.8)
+        split_ind = int(len(methods) * train)
         self.train_data = methods[0:split_ind]
         self.test_data  = methods[split_ind:]
 
-    #train on a list of tokenized methods
+    ## trains model on train data by adding key window to the lookup-table and to the connected record
     def train(self):
         for method in self.train_data:
             window = method[0 : self.n-1]
@@ -58,8 +64,7 @@ class Model:
 
                 window = window[1:] + [token]
 
-    #evaluate and return values used to eval model. Using perplexity, which is confidence of the model. Given a starting window
-    #based on the test data, what is the confidence of the next generated token.
+    ## evaluates model based on perplexity which is pow(1/product of all prediction probabilities, 1/number of predictions made).
     def eval(self):
         count = 0
         product_probs = 1
@@ -74,6 +79,7 @@ class Model:
         perplexity = (1/product_probs)**(1/count)
         return perplexity
 
+    ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses most likely next token.
     def predict(self, context, n = 1000):
         predicted_tokens = context
         count = 0
@@ -87,6 +93,7 @@ class Model:
                 return predicted_tokens
         return predicted_tokens
     
+    ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses probable next token.
     def predict_rand(self, context, n=1000):
         predicted_tokens = context
         count = 0
