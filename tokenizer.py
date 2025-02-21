@@ -40,7 +40,6 @@ def remove_boilerplate_methods(data):
     data = data[~data["Method Java"].apply(lambda x: bool(boilerplate_regex.search(x)))]
     return data
 
-
 def remove_comments_from_dataframe(df: pd.DataFrame, method_column: str, language: str) -> pd.DataFrame:
     """
     Removes comments from Java methods in a DataFrame and adds a new column with cleaned methods.
@@ -60,15 +59,16 @@ def remove_comments_from_dataframe(df: pd.DataFrame, method_column: str, languag
         # Filter out comments using a lambda function
         clean_code = ''.join(token[1] for token in tokens if not (lambda t: t[0] in Token.Comment)(token))
 
-
         return clean_code
 
-    # Apply the function to the specified column and add a new column with the results
-    df["Method Java No Comments"] = df[method_column].apply(remove_comments)
     return df
 
+def remove_multiline_comments(method_string:str) -> str:
+    """Removes multiline comments from a method that is formatted into one long string"""
+    pass
+
 methods = []
-for data_file in os.listdir()[:10]:
+for data_file in os.listdir()[:1]:
     with open(data_file, "r") as file:
         reader = csv.reader(file)
         header = next(reader)
@@ -99,10 +99,11 @@ lexer = JavaLexer()
 with open("tokens.txt", "w") as file:
     for index, row in data.iterrows():
         row_string = str(row)
-        method = row_string[row_string.find("Method Java")+11:].strip()
+        method = row_string[row_string.find("Method Java")+11:row_string.find("Name:")].strip()
         tokens = [t[1] for t in lexer.get_tokens(method)]
-        file.write(str(tokens)[1:-1] + "\n")
-
-
-
-
+        concat_tokens = ""
+        for t in tokens:
+            if t not in ["\\", "n", "\n", "t", "\t"] and len(t) > 0:
+                concat_tokens += (t + " ")
+        concat_tokens = re.sub(r"\/\s*(\*)+.*(\*)+\s*\/", "", concat_tokens)
+        file.write(concat_tokens + "\n")
