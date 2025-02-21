@@ -15,6 +15,10 @@ class Record:
         self.total += 1
 
     def predict_next_token(self):
+        max_key = max(self.dict, key=self.dict.get)
+        return max_key, self.dict[max_key]/self.total
+
+    def predict_next_token_rand(self):
         x = randint(0, self.total)
         for token in self.dict:
           x -= self.dict[token]
@@ -54,7 +58,8 @@ class Model:
 
                 window = window[1:] + [token]
 
-    #evaluate and return values used to eval model
+    #evaluate and return values used to eval model. Using perplexity, which is confidence of the model. Given a starting window
+    #based on the test data, what is the confidence of the next generated token.
     def eval(self):
         pass
 
