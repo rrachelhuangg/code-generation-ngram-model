@@ -68,8 +68,8 @@ def remove_multiline_comments(method_string:str) -> str:
     pass
 
 methods = []
-for data_file in os.listdir()[:1]:
-    with open(data_file, "r") as file:
+for data_file in os.listdir("extracted")[:1]:
+    with open("extracted/"+data_file, "r") as file:
         reader = csv.reader(file)
         header = next(reader)
         for row in reader:
@@ -78,6 +78,11 @@ for data_file in os.listdir()[:1]:
 data = pd.DataFrame({
     "Method Java": methods
 })
+
+pd.set_option('display.max_colwidth', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+
 
 print("Initial dataset size:", len(data))
 data = remove_duplicates(data)
@@ -104,6 +109,9 @@ with open("tokens.txt", "w") as file:
         concat_tokens = ""
         for t in tokens:
             if t not in ["\\", "n", "\n", "t", "\t"] and len(t) > 0:
-                concat_tokens += (t + " ")
+                if t[0]=="t" and len(t)>1:
+                    concat_tokens += (t[1:] + " ")
+                else:
+                    concat_tokens += (t+" ")
         concat_tokens = re.sub(r"\/\s*(\*)+.*(\*)+\s*\/", "", concat_tokens)
         file.write(concat_tokens + "\n")
