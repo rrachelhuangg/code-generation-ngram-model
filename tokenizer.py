@@ -113,5 +113,6 @@ with open("tokens.txt", "w") as file:
                     concat_tokens += (t[1:] + " ")
                 else:
                     concat_tokens += (t+" ")
-        concat_tokens = re.sub(r"\/\s*(\*)+.*(\*)+\s*\/", "", concat_tokens)
+        for regex in [r"\/\s*(\*)+.*(\*)+\s*\/",r"\/\/.*\\t+", r"\\t",r"\\n", r"\/\/"]:
+            concat_tokens = re.sub(regex, "", concat_tokens)
         file.write(concat_tokens + "\n")
