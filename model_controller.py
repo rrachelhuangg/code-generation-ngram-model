@@ -1,5 +1,6 @@
 import os
 import sys
+from model import Model
 
 def train_on_method_tokens(tokens):
     pass
@@ -7,7 +8,15 @@ def train_on_method_tokens(tokens):
 args  = sys.argv
 nargs = len(args)
 
+file_agg = []
+
 for arg in args:
-    if arg[-3:] == ".txt":
+    if arg[-4:] == ".txt":
         file_txt = open(arg, "r").read()
-        methods = file_txt.split("\n")
+        file_agg += file_txt.split(' ')
+
+m = Model(3)
+m.partition_data(file_agg)
+m.train()
+print("Perplexity of model: ", m.eval())
+print("Predicted sentence given [public, static]: ", m.predict(["public", "static"]))
