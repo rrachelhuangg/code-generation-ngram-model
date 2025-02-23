@@ -79,7 +79,8 @@ class Model:
         count = 0
         product_probs = 1
         for method in self.test_data:
-            window = method[0:self.n-1]
+            rand_ind = randint(0, len(method) - self.n)
+            window = method[rand_ind: rand_ind + self.n-1]
             hashable_window = tuple(window)
             if hashable_window not in self.lookup_table:
                 continue
