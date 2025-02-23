@@ -1,5 +1,6 @@
 from random import randint
 from random import shuffle
+from math import log2
 
 class Record:
 
@@ -77,7 +78,7 @@ class Model:
     ## evaluates model based on perplexity which is pow(1/product of all prediction probabilities, 1/number of predictions made).
     def eval(self):
         count = 0
-        product_probs = 1
+        sum_probs = 0
         for method in self.test_data:
             rand_ind = randint(0, len(method) - self.n)
             window = method[rand_ind: rand_ind + self.n-1]
@@ -85,12 +86,12 @@ class Model:
             if hashable_window not in self.lookup_table:
                 continue
             _, confidence = self.lookup_table[hashable_window].predict_next_token()
-            product_probs *= confidence
+            sum_probs += log2(confidence)
             count += 1
         
         if count == 0:
             return 0
-        perplexity = (product_probs)**(-1/count)
+        perplexity = pow(2, (-1/self.n) * sum_probs)
         return perplexity
 
     ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses most likely next token.
