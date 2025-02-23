@@ -40,6 +40,10 @@ class Model:
         self.train_data = []
         self.test_data = []
 
+    ## returns an n-1 length sample of data from the test_data
+    def get_sample(self):
+        return self.test_data[randint(0, len(self.test_data))][:self.n-1]
+
     ## this method takes a long string of methods separated by "\n" and partitions the data into a split train/test
     def partition_data(self, tokens : list, train = 0.8):
         methods = []
