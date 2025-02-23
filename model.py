@@ -44,23 +44,29 @@ class Model:
     def partition_data(self, tokens : list, train = 0.8):
         methods = []
         ind = tokens.index("\n")
-        while ind >= 0:
+        while ind > 0:
             methods += [tokens[0:ind]]
             tokens = tokens[ind + 1:]
+            try:
+                ind = tokens.index("\n")
+            except:
+                break
         shuffle(methods)
 
         split_ind = int(len(methods) * train)
         self.train_data = methods[0:split_ind]
         self.test_data  = methods[split_ind:]
+        return len(self.train_data), len(self.test_data)
 
     ## trains model on train data by adding key window to the lookup-table and to the connected record
     def train(self):
         for method in self.train_data:
             window = method[0 : self.n-1]
             for token in method[self.n-1:]:
-                if window not in self.lookup_table:
-                    self.lookup_table[window] = Record()
-                self.lookup_table[window].add_token(token)
+                hashable_window = tuple(window)
+                if hashable_window not in self.lookup_table:
+                    self.lookup_table[hashable_window] = Record()
+                self.lookup_table[hashable_window].add_token(token)
 
                 window = window[1:] + [token]
 
@@ -69,24 +75,29 @@ class Model:
         count = 0
         product_probs = 1
         for method in self.test_data:
-            window = method[0:self.n]
-            if window not in self.lookup_table:
+            window = method[0:self.n-1]
+            hashable_window = tuple(window)
+            if hashable_window not in self.lookup_table:
                 continue
-            _, confidence = self.lookup_table[window].predict_next_token()
+            _, confidence = self.lookup_table[hashable_window].predict_next_token()
             product_probs *= confidence
             count += 1
         
-        perplexity = (1/product_probs)**(1/count)
+        if count == 0:
+            return 0
+        perplexity = (product_probs)**(-1/count)
         return perplexity
 
     ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses most likely next token.
-    def predict(self, context, n = 1000):
-        predicted_tokens = context
+    def predict(self, context : list, n = 1000):
+        predicted_tokens = context.copy()
         count = 0
-        while context in self.lookup_table:
-            token = self.lookup_table[context].predict_next_token()
+        hashable_context = tuple(context)
+        while hashable_context in self.lookup_table:
+            token,_ = self.lookup_table[hashable_context].predict_next_token()
             predicted_tokens += [token]
             context = context[1:] + [token]
+            hashable_context = tuple(context)
             
             count += 1
             if count == n:
@@ -97,10 +108,12 @@ class Model:
     def predict_rand(self, context, n=1000):
         predicted_tokens = context
         count = 0
-        while context in self.lookup_table:
-            token = self.lookup_table[context].predict_next_token_rand()
+        hashable_context = tuple(context)
+        while hashable_context in self.lookup_table:
+            token = self.lookup_table[hashable_context].predict_next_token_rand()
             predicted_tokens += [token]
             context = context[1:] + [token]
+            hashable_context = tuple(context)
             
             count += 1
             if count == n:
