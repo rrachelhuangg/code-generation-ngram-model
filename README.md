@@ -1,3 +1,8 @@
+/**  
+* AUTHOR  : Rachel Huang, Jackson Taylor
+* CREATED : 17-2-2025
+**/
+
 # N-gram probabilistic code token recommendation model
 
 Model workflow: Download dataset of Java method code, clean and tokenize the data, train and test our n-gram model on the data for variable n, return sample code token generation results from optimal n-gram model
