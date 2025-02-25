@@ -1,3 +1,10 @@
+##  
+# AUTHOR   : Rachel Huang, Jackson Taylor
+# CREATED  : 20-2-2025
+# EDITED   : 25-2-2025
+# CONTAINS : Pre-proccessing methods to clean data and output cleaned methods to output file
+##
+
 import csv
 import os
 import re

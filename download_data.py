@@ -1,3 +1,10 @@
+##  
+# AUTHOR   : Rachel Huang, Jackson Taylor
+# CREATED  : 20-2-2025
+# EDITED   : 20-2-2025
+# CONTAINS : Tweaked PyDriller code to download data continuously
+##
+
 import pandas as pd
 from pydriller import Repository
 import os
