@@ -18,7 +18,7 @@ Model workflow: Download dataset of Java method code, clean and tokenize the dat
 
 ## Testing
 #### Testing the data extraction and processing pipeline
-*  `python tokenizer.py`
+*  `python tokenizer.py` cleans and tokenizes the extracted data that is located in the `extracted` directory in this repo
 
 #### Testing the overall n-gram model
 * `git clone https://github.com/rrachelhuangg/genai_project1.git`
