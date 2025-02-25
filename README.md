@@ -1,17 +1,27 @@
-1. GHS REPOS
-2. PYDRILLER (.csv) or SrcML(.xml)
-3. pre-processing.py
-4. tokenization [javalang]
-5. make model
-6. evaluation based on perplexity
-7. training data -> pick the best model
-8. test -> perplexity
-9. test on a single model
+# N-gram probabilistic code token recommendation model
 
-Steps:
-- put corpus together (put the two google colab notebooks together locally to run)
-- construct big lookup table by processing corpus
-- structure of lookup table; dictionary where keys are lists of n-1 tokens, values are sets of tuples containing possible subsequent words and each of their counts
-- probabilistic model n-gram: add together all of the counts of the n-1 tokens being looked at - use this
-to look at the values of that n-1 tokens key. pick a random number from 0-(the sum), and iterate through tuple values, subtracting each count from that random number. return word in tuple when running count goes negative.
-- have the above: as table and count attributes of a Record class
+Model workflow: Download dataset of Java method code, clean and tokenize the data, train and test our n-gram model on the data for variable n, return sample code token generation results from optimal n-gram model
+
+* The Java method dataset was curated by using Datahub with respository specifications to make sure that the data methods we collected were complex enough to support our model's functionality.
+* Cleaning and tokenizing the data was done with a foundation of the Pydriller and Preprocessing notebooks given to us in class. 
+  * To properly clean and tokenize the data, the Pydriller code file was run in a tmux environment, to ensure that it could complete downloading the large amount of data necessary to run the model, without exiting when our laptop was closed.
+  * After the extracted methods were downloaded, the Preprocessing code was modified so that it would iterate through the extracted files and apply the code cleanup methods to the data. The cleaned methods were then written to one large file by iterating to each dataframe, where each new line in the file was a single method. Tokens in each method were separate by a single space. 
+  * Additional functionality had to be added to the proprocessing code, as some bugs were discovered.
+      * Most notably, the pandas dataframe used to clean the data had a column width limitation, so code processing code was only applied to truncated versions of each method. This bug was fixed by removing the pandas dataframe column width.
+      * The preprocessing code also did not remove multiline or single line comments when cleaning the data. This bug was fixed by applying regex to the data before writing to the output file.
+      * In addition, the preprocessing code had trouble tokenizing space characters, such as "\t" and "\n". This bug was fixed by ensuring that each token was a non-space character before writing to the ouput file, as well as applying regex.
+
+## Testing
+#### Testing the data extraction and processing pipeline
+
+#### Testing the overall n-gram model
+* `git clone https://github.com/rrachelhuangg/genai_project1.git`
+* `cd genai_project1`
+* `python model_controller.py tokens.txt`
+
+Tools used: ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54) 
+
+
+
+
+
