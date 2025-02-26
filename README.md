@@ -1,7 +1,8 @@
-/**  
-* AUTHOR  : Rachel Huang, Jackson Taylor
-* CREATED : 17-2-2025
-**/
+##  
+# AUTHOR  : Rachel Huang, Jackson Taylor
+# CREATED : 17-2-2025
+# EDITED  : 25-2-2025
+##
 
 # N-gram probabilistic code token recommendation model
 
@@ -18,7 +19,7 @@ Model workflow: Download dataset of Java method code, clean and tokenize the dat
 
 ## Testing
 #### Testing the data extraction and processing pipeline
-*  `python tokenizer.py` cleans and tokenizes the extracted data that is located in the `extracted` directory in this repo
+*  `python tokenizer.py`
 
 #### Testing the overall n-gram model
 * `git clone https://github.com/rrachelhuangg/genai_project1.git`
