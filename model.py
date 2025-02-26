@@ -1,3 +1,10 @@
+##  
+# AUTHOR   : Rachel Huang, Jackson Taylor
+# CREATED  : 20-2-2025
+# EDITED   : 23-2-2025
+# CONTAINS : Model and helper classes to contain data and information about model
+##
+
 from random import randint
 from random import shuffle
 from math import log2

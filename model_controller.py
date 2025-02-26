@@ -1,3 +1,10 @@
+##  
+# AUTHOR   : Rachel Huang, Jackson Taylor
+# CREATED  : 20-2-2025
+# EDITED   : 23-2-2025
+# CONTAINS : Controller code to run model according to project specifications
+##
+
 import os
 import sys
 from model import Model
