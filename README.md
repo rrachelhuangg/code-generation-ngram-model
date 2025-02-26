@@ -1,7 +1,5 @@
-/**  
-* AUTHOR  : Rachel Huang, Jackson Taylor
-* CREATED : 17-2-2025
-**/
+AUTHOR  : Rachel Huang, Jackson Taylor\
+CREATED : 17-2-2025
 
 # N-gram probabilistic code token recommendation model
 
