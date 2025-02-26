@@ -125,7 +125,7 @@ for repo in repoList[:5000]:
     fileNameToSave = fileNameToSave.replace('/','_')
 
     # Specify the path to the output CSV file
-    output_csv_file = "extracted_methods_{}.csv".format(fileNameToSave)
+    output_csv_file = "extracted/extracted_methods_{}.csv".format(fileNameToSave)
     # Run the extraction
     try:
       extract_methods_to_csv_from_master(repo, output_csv_file)
