@@ -41,6 +41,10 @@ class Record:
 
 class Model:
 
+    method_begin_token   = "<beg>"
+    method_end_token     = "<end>"
+    method_unknown_token = "<unk>"
+
     ## constructor for Model class initialises n of n-gram, the model brain (lookup-table) as well as empty lists for the data partitioning
     def __init__(self, n : int):
         self.n = n
@@ -55,12 +59,12 @@ class Model:
     ## this method takes a long string of methods separated by "\n" and partitions the data into a split train/test
     def partition_data(self, tokens : list, train = 0.8):
         methods = []
-        ind = tokens.index("\n")
+        ind = tokens.index(Model.method_begin_token)
         while ind > 0:
             methods += [tokens[0:ind]]
             tokens = tokens[ind + 1:]
             try:
-                ind = tokens.index("\n")
+                ind = tokens.index(Model.method_begin_token)
             except:
                 break
         shuffle(methods)
@@ -109,13 +113,17 @@ class Model:
         while hashable_context in self.lookup_table:
             token,_ = self.lookup_table[hashable_context].predict_next_token()
             predicted_tokens += [token]
+
+            if token == Model.method_end_token:
+                return predicted_tokens
+
             context = context[1:] + [token]
             hashable_context = tuple(context)
             
             count += 1
             if count == n:
-                return predicted_tokens
-        return predicted_tokens
+                return predicted_tokens + [Model.method_end_token]
+        return predicted_tokens + [Model.method_unknown_token]
     
     ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses probable next token.
     def predict_rand(self, context, n=1000):
@@ -125,10 +133,14 @@ class Model:
         while hashable_context in self.lookup_table:
             token = self.lookup_table[hashable_context].predict_next_token_rand()
             predicted_tokens += [token]
+
+            if token == Model.method_end_token:
+                return predicted_tokens
+
             context = context[1:] + [token]
             hashable_context = tuple(context)
             
             count += 1
             if count == n:
-                return predicted_tokens
-        return predicted_tokens
+                return predicted_tokens + [Model.method_end_token]
+        return predicted_tokens + [Model.method_unknown_token]
