@@ -26,18 +26,18 @@ class Record:
         self.total += 1
 
     ## the non-random prediction method which returns the most likely following token, as well as the confidence of that token out of all tokens
-    def predict_next_token(self):
+    def predict_next_token(self) -> Tuple[str, float]:
         max_key = max(self.dict, key=self.dict.get)
         return max_key, self.dict[max_key]/self.total
 
     ## the random prediction methods which returns a random possible token, as well as the confidence of that token out of all tokens.
-    def predict_next_token_rand(self):
+    def predict_next_token_rand(self) -> Tuple[str, float]:
         x = randint(0, self.total)
         for token in self.dict:
           x -= self.dict[token]
           if x <= 0:
               return token, self.dict[token]/self.total
-        return "PIG" #fail state
+        return "PIG", 0 #fail state
 
 
 class Model:
@@ -63,7 +63,7 @@ class Model:
         #it's because the beg token is always at idx 0 , and so methods has to be += [1:<end> token idx]
         ind = tokens.index(Model.method_end_token)
         while ind < len(tokens):
-            methods += [tokens[1:ind]]
+            methods += [tokens[1:ind-1]]
             tokens = tokens[ind+1:]
             try:
                 ind = tokens.index(Model.method_end_token)
@@ -116,13 +116,18 @@ class Model:
     def predict(self, context : list, n = 1000) -> list:
         predicted_tokens = context.copy()
         count = 0
+        open_brackets = 0
         hashable_context = tuple(context)
         while hashable_context in self.lookup_table:
             token,_ = self.lookup_table[hashable_context].predict_next_token()
             predicted_tokens += [token]
 
-            if token == Model.method_end_token:
-                return predicted_tokens
+            if token == "{":
+                open_brackets += 1
+            if token == "}":
+                open_brackets -= 1
+                if open_brackets <= 0:
+                    return predicted_tokens + [Model.method_end_token]
 
             context = context[1:] + [token]
             hashable_context = tuple(context)
@@ -136,13 +141,18 @@ class Model:
     def predict_rand(self, context, n=1000) -> list:
         predicted_tokens = context
         count = 0
+        open_brackets = 0
         hashable_context = tuple(context)
         while hashable_context in self.lookup_table:
             token = self.lookup_table[hashable_context].predict_next_token_rand()
             predicted_tokens += [token]
 
-            if token == Model.method_end_token:
-                return predicted_tokens
+            if token == "{":
+                open_brackets += 1
+            if token == "}":
+                open_brackets -= 1
+                if open_brackets <= 0:
+                    return predicted_tokens + [Model.method_end_token]
 
             context = context[1:] + [token]
             hashable_context = tuple(context)
