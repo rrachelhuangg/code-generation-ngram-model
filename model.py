@@ -8,6 +8,7 @@
 from random import randint
 from random import shuffle
 from math import log2
+from typing import Tuple
 
 class Record:
 
@@ -53,11 +54,11 @@ class Model:
         self.test_data = []
 
     ## returns an n-1 length sample of data from the test_data
-    def get_sample(self):
-        return self.test_data[randint(0, len(self.test_data))][:self.n-1]
+    def get_sample(self) -> list:
+        return self.train_data[randint(0, len(self.test_data))]
 
     ## this method takes a long string of methods separated by "\n" and partitions the data into a split train/test
-    def partition_data(self, tokens : list):
+    def partition_data(self, tokens : list) -> Tuple[int, int]:
         methods = []
         #it's because the beg token is always at idx 0 , and so methods has to be += [1:<end> token idx]
         ind = tokens.index(Model.method_end_token)
@@ -74,6 +75,11 @@ class Model:
         self.train_data = methods[split_ind:]
         self.test_data  = methods[0:split_ind]
         return len(self.train_data), len(self.test_data)
+    
+    ## copy data partition from another model
+    def copy_partition_data(self, model):
+        self.train_data = model.train_data
+        self.test_data  = model.test_data
 
     ## trains model on train data by adding key window to the lookup-table and to the connected record
     def train(self):
@@ -88,7 +94,7 @@ class Model:
                 window = window[1:] + [token]
 
     ## evaluates model based on perplexity which is pow(1/product of all prediction probabilities, 1/number of predictions made).
-    def eval(self):
+    def eval(self) -> float:
         count = 0
         sum_probs = 0
         for method in self.test_data:
@@ -104,11 +110,10 @@ class Model:
         if count == 0:
             return 0
         perplexity = pow(2, (-1/self.n) * sum_probs)
-        #this is wrong
         return perplexity
 
     ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses most likely next token.
-    def predict(self, context : list, n = 1000):
+    def predict(self, context : list, n = 1000) -> list:
         predicted_tokens = context.copy()
         count = 0
         hashable_context = tuple(context)
@@ -128,7 +133,7 @@ class Model:
         return predicted_tokens + [Model.method_unknown_token]
     
     ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses probable next token.
-    def predict_rand(self, context, n=1000):
+    def predict_rand(self, context, n=1000) -> list:
         predicted_tokens = context
         count = 0
         hashable_context = tuple(context)

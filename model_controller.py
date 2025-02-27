@@ -15,6 +15,12 @@ def train_on_method_tokens(tokens, n):
     m.train()
     return m.eval(), m
 
+def train_on_part_data(model, n):
+    m = Model(n)
+    m.copy_partition_data(model)
+    m.train()
+    return m.eval(), m
+
 args  = sys.argv 
 nargs = len(args)
 
@@ -25,16 +31,14 @@ for arg in args:
         file_txt = open(arg, "r").read()
         file_agg += file_txt.split(' ')
 
-best_model = None
-best_perp  = 100000
-for n in range(2, 8):
-    perplexity, model = train_on_method_tokens(file_agg, n)
+best_perp, best_model = train_on_method_tokens(file_agg, 3)
+for n in range(5, 9, 2):
+    perplexity, model = train_on_part_data(best_model, n)
     if perplexity < best_perp:
         best_model = model
-        best_perp = perplexity
+        best_perp  = perplexity
 
 print("Perplexity of model: ", best_perp, " and n of model: ", best_model.n)
-# sample = best_model.get_sample()
-# print("GROUND TRUTH: ", sample)
-# print("PREDICT: ", ' '.join(best_model.predict(sample, 100)))
-print("Random Prediction: ", ' '.join(best_model.predict(best_model.get_sample(), 100)))
+sample = best_model.get_sample()
+print("Ground Truth: ", sample)
+print("Prediction: ", ' '.join(best_model.predict(sample[:best_model.n-1], 100)))
