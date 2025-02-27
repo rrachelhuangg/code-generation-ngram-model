@@ -1,7 +1,7 @@
 ##  
 # AUTHOR   : Rachel Huang, Jackson Taylor
 # CREATED  : 20-2-2025
-# EDITED   : 23-2-2025
+# EDITED   : 27-2-2025
 # CONTAINS : Model and helper classes to contain data and information about model
 ##
 
@@ -57,21 +57,22 @@ class Model:
         return self.test_data[randint(0, len(self.test_data))][:self.n-1]
 
     ## this method takes a long string of methods separated by "\n" and partitions the data into a split train/test
-    def partition_data(self, tokens : list, train = 0.8):
+    def partition_data(self, tokens : list):
         methods = []
-        ind = tokens.index(Model.method_begin_token)
-        while ind > 0:
-            methods += [tokens[0:ind]]
-            tokens = tokens[ind + 1:]
+        #it's because the beg token is always at idx 0 , and so methods has to be += [1:<end> token idx]
+        ind = tokens.index(Model.method_end_token)
+        while ind < len(tokens):
+            methods += [tokens[1:ind]]
+            tokens = tokens[ind+1:]
             try:
-                ind = tokens.index(Model.method_begin_token)
+                ind = tokens.index(Model.method_end_token)
             except:
                 break
         shuffle(methods)
 
-        split_ind = int(len(methods) * train)
-        self.train_data = methods[0:split_ind]
-        self.test_data  = methods[split_ind:]
+        split_ind = 100
+        self.train_data = methods[split_ind:]
+        self.test_data  = methods[0:split_ind]
         return len(self.train_data), len(self.test_data)
 
     ## trains model on train data by adding key window to the lookup-table and to the connected record
@@ -103,6 +104,7 @@ class Model:
         if count == 0:
             return 0
         perplexity = pow(2, (-1/self.n) * sum_probs)
+        #this is wrong
         return perplexity
 
     ## makes a continued prediction based on the context until number of predicted tokens reaches n or there are no more predictions. Uses most likely next token.
