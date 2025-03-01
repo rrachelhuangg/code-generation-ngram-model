@@ -55,8 +55,8 @@ class Model:
         self.validation_data = []
 
     ## returns an n-1 length sample of data from the test_data
-    def get_sample(self) -> list:
-        return self.train_data[randint(0, len(self.test_data))]
+    def get_sample(self, data) -> list:
+        return data[randint(0, len(data))]
 
     ## this method takes a long string of methods separated by "\n" and partitions the data into a split train/test
     def partition_data(self, tokens : list):
