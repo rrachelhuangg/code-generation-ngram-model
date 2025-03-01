@@ -4,7 +4,7 @@
 * EDITED  : 1-3-2025
 ####
 
-# GenAI for Software Development (Ngram)
+## GenAI for Software Development (Ngram)
 
 * [1 Introduction](#1-introduction)  
 * [2 Getting Started](#2-getting-started)  
@@ -15,16 +15,16 @@
 
 ---
 
-# **1. Introduction**  
+## **1. Introduction**  
 This project explores **code completion in Java**, leveraging **N-gram language modeling**. The N-gram model predicts the next token in a sequence by learning the probability distributions of token occurrences in training data. The model selects the most probable token based on learned patterns, making it a fundamental technique in natural language processing and software engineering automation.  
 
 ---
 
-# **2. Getting Started**  
+## **2. Getting Started**  
 
 This project is implemented in **Python 3.9+** and is compatible with **macOS, Linux, and Windows**.  
 
-## **2.1 Preparations**  
+### **2.1 Preparations**  
 
 ```shell
 (1) Clone the repository to your workspace:
@@ -49,13 +49,13 @@ To deactivate the virtual environment, use the command:
 (venv) $ deactivate
 ```
 
-## **2.2 Install Packages**
+### **2.2 Install Packages**
 
 Install the required dependencies:
 
 (venv) ~/code-generation-ngram-model $ pip install -r requirements.txt
 
-## **2.3 Run N-gram**
+### **2.3 Run N-gram**
 
 (1) Run N-gram Demo
 
@@ -65,7 +65,7 @@ Since the training corpus differs from both the instructor-provided dataset and 
 (venv) ~/code-generation-ngram-model $ python ngram.py corpus.txt
 
 
-## 3. Report
+### 3. Report
 
 The assignment report is available in the file Assignment_Report.pdf.
 
