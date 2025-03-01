@@ -126,7 +126,8 @@ for data_file in os.listdir("extracted"):
                 for regex in [r"\/\s*(\*)+.*(\*)+\s*\/",r"\/\/.*\\t+", r"\\t",r"\\n", r"\/\/"]:
                     concat_tokens = re.sub(regex, "", concat_tokens)
                 concat_tokens = re.sub(r"\s{2,}"," ", concat_tokens)
-                file.write("<beg> " + concat_tokens + " <end> ")
+                # file.write("<beg> " + concat_tokens + " <end> ")
+                file.write(concat_tokens + "\n")
                 temp +=1
         count += 1
 
