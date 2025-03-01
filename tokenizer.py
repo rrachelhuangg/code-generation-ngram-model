@@ -1,7 +1,7 @@
 ##  
 # AUTHOR   : Rachel Huang, Jackson Taylor
 # CREATED  : 20-2-2025
-# EDITED   : 25-2-2025
+# EDITED   : 27-2-2025
 # CONTAINS : Pre-proccessing methods to clean data and output cleaned methods to output file
 ##
 
@@ -110,6 +110,7 @@ for data_file in os.listdir("extracted"):
         total_methods += len(data)
 
         lexer = JavaLexer()
+        temp = 0
         with open(f"tokens/tokens{count}.txt", "w") as file:
             for index, row in data.iterrows():
                 row_string = str(row)
@@ -125,8 +126,11 @@ for data_file in os.listdir("extracted"):
                 for regex in [r"\/\s*(\*)+.*(\*)+\s*\/",r"\/\/.*\\t+", r"\\t",r"\\n", r"\/\/"]:
                     concat_tokens = re.sub(regex, "", concat_tokens)
                 concat_tokens = re.sub(r"\s{2,}"," ", concat_tokens)
-                file.write("<beg> " + concat_tokens + " <end>")
+                file.write("<beg> " + concat_tokens + " <end> ")
+                temp +=1
         count += 1
+
+print("METHOD COUNT: ", temp)
 
 for tokens_file in os.listdir("tokens"):
     with open(f"all_tokens.txt", "w") as file:
