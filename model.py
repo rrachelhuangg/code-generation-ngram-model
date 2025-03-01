@@ -1,7 +1,7 @@
 ##  
 # AUTHOR   : Rachel Huang, Jackson Taylor
 # CREATED  : 20-2-2025
-# EDITED   : 23-2-2025
+# EDITED   : 26-2-2025
 # CONTAINS : Model and helper classes to contain data and information about model
 ##
 
