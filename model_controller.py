@@ -13,13 +13,13 @@ def train_on_method_tokens(tokens, n):
     m = Model(n)
     m.partition_data(file_agg)
     m.train()
-    return m.eval(), m
+    return m.eval(m.validation_data), m
 
 def train_on_part_data(model, n):
     m = Model(n)
     m.copy_partition_data(model)
     m.train()
-    return m.eval(), m
+    return m.eval(m.validation_data), m
 
 args  = sys.argv 
 nargs = len(args)
