@@ -1,8 +1,8 @@
-##
-# AUTHOR  : Rachel Huang, Jackson Taylor\
-# CREATED : 17-2-2025
-# EDITED  : 26-2-2025
-##
+####
+* AUTHOR  : Rachel Huang, Jackson Taylor
+* CREATED : 17-2-2025
+* EDITED  : 1-3-2025
+####
 
 # GenAI for Software Development (Ngram)
 
@@ -26,23 +26,23 @@ This project is implemented in **Python 3.9+** and is compatible with **macOS, L
 
 ## **2.1 Preparations**  
 
-(1) Clone the repository to your workspace:  
 ```shell
-~ $ git clone https://github.com/your-repository/your-project.git
+(1) Clone the repository to your workspace:
+
+~ $ git clone https://github.com/rrachelhuangg/code-generation-ngram-model.git
 
 (2) Navigate into the repository:
 
-~ $ cd your-project
-~/your-project $
+~ $ cd code-generation-ngram-model
+~/code-generation-ngram-model $
 
 (3) Set up a virtual environment and activate it:
 
 For macOS/Linux:
 
-~/your-project $ python -m venv ./venv/
-~/your-project $ source venv/bin/activate
-(venv) ~/your-project $ 
-
+~/code-generation-ngram-model $ python -m venv ./venv/
+~/code-generation-ngram-model $ source venv/bin/activate
+(venv) ~/code-generation-ngram-model $ 
 
 To deactivate the virtual environment, use the command:
 
@@ -53,7 +53,7 @@ To deactivate the virtual environment, use the command:
 
 Install the required dependencies:
 
-(venv) ~/your-project $ pip install -r requirements.txt
+(venv) ~/code-generation-ngram-model $ pip install -r requirements.txt
 
 ## **2.3 Run N-gram**
 
@@ -62,7 +62,7 @@ Install the required dependencies:
 The script takes a corpus of Java methods as input and automatically identifies the best-performing model based on a specific N-value. It then evaluates the selected model on the test set extracted according to the assignment specifications.
 Since the training corpus differs from both the instructor-provided dataset and our own dataset, we store the results in a file named results_provided_model.[json/csv/txt] to distinguish them accordingly.
 
-(venv) ~/your-project $ python ngram.py corpus.txt
+(venv) ~/code-generation-ngram-model $ python ngram.py corpus.txt
 
 
 ## 3. Report
