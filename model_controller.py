@@ -56,5 +56,5 @@ model_performances["best"]["Ground Truth"]    = gt
 model_performances["best"]["Context Window"]  = context
 model_performances["best"]["Prediction"]      = prediction
 
-with open('data.json', 'w') as outfile:
+with open('results_model.json', 'w') as outfile:
     json.dump(model_performances, outfile)

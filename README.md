@@ -60,9 +60,9 @@ Install the required dependencies:
 (1) Run N-gram Demo
 
 The script takes a corpus of Java methods as input and automatically identifies the best-performing model based on a specific N-value. It then evaluates the selected model on the test set extracted according to the assignment specifications.
-Since the training corpus differs from both the instructor-provided dataset and our own dataset, we store the results in a file named results_provided_model.[json/csv/txt] to distinguish them accordingly.
+Since the training corpus differs from both the instructor-provided dataset and our own dataset, we store the results in a file named results_model.json to distinguish them accordingly.
 
-(venv) ~/code-generation-ngram-model $ python ngram.py corpus.txt
+(venv) ~/code-generation-ngram-model $ python model_controller.py all_tokens.txt
 
 
 ### 3. Report
