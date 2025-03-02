@@ -25,12 +25,17 @@ def train_on_part_data(model, n):
 args  = sys.argv 
 nargs = len(args)
 
-method_agg = []
+file_txt = None
+outfile  = 'results_model.json'
 
-for arg in args:
-    if arg[-4:] == ".txt":
-        file_txt = open(arg, "r").read()
-        method_agg += file_txt.split('\n')
+if nargs < 2:
+    sys.exit("No File Given")
+if nargs < 3:
+    file_txt = open(args[2], "r").read()
+if nargs < 4:
+    outfile = args[3] + ".json"
+
+method_agg = file_txt.split('\n')
 
 input_data = []
 for method in method_agg:
@@ -61,5 +66,5 @@ model_performances["best"]["Ground Truth"]    = gt
 model_performances["best"]["Context Window"]  = context
 model_performances["best"]["Prediction"]      = prediction
 
-with open('results_model.json', 'w') as outfile:
+with open(outfile, 'w') as outfile:
     json.dump(model_performances, outfile)
