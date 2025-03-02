@@ -12,7 +12,7 @@ from model import Model
 
 def train_on_method_tokens(tokens, n):
     m = Model(n)
-    m.partition_data(file_agg)
+    m.partition_data(tokens)
     m.train()
     return m.eval(m.validation_data), m
 
@@ -25,16 +25,21 @@ def train_on_part_data(model, n):
 args  = sys.argv 
 nargs = len(args)
 
-file_agg = []
+method_agg = []
 
 for arg in args:
     if arg[-4:] == ".txt":
         file_txt = open(arg, "r").read()
-        file_agg += file_txt.split(' ')
+        method_agg += file_txt.split('\n')
+
+input_data = []
+for method in method_agg:
+    method.strip()
+    input_data.append(method.split(' '))
 
 model_performances = {}
 model_performances["n"] = {}
-best_perp, best_model = train_on_method_tokens(file_agg, 3)
+best_perp, best_model = train_on_method_tokens(input_data, 3)
 model_performances["n"][3] = best_perp
 for n in range(5, 10, 2):
     perplexity, model = train_on_part_data(best_model, n)

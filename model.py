@@ -59,16 +59,7 @@ class Model:
         return data[randint(0, len(data))]
 
     ## this method takes a long string of methods separated by "\n" and partitions the data into a split train/test
-    def partition_data(self, tokens : list):
-        methods = []
-        ind = tokens.index("\n")
-        while ind < len(tokens):
-            methods += [tokens[1:ind-1]]
-            tokens = tokens[ind+1:]
-            try:
-                ind = tokens.index("\n")
-            except:
-                break
+    def partition_data(self, methods : list):
         shuffle(methods)
 
         test_indices = 100
@@ -100,6 +91,8 @@ class Model:
         count = 0
         sum_probs = 0
         for method in methods:
+            if len(method) <= self.n:
+                continue
             rand_ind = randint(0, len(method) - self.n)
             window = method[rand_ind: rand_ind + self.n-1]
             hashable_window = tuple(window)
