@@ -52,21 +52,25 @@ To deactivate the virtual environment, use the command:
 ### **2.2 Install Packages**
 
 Install the required dependencies:
-
+```shell
 (venv) ~/code-generation-ngram-model $ pip install -r requirements.txt
-
+```
 ### **2.3 Run N-gram**
 
 (1) How to run N-gram Demo
 
 The script takes a corpus of Java methods as input and automatically identifies the best-performing model based on a specific N-value. It then evaluates the selected model on the test set extracted according to the assignment specifications. The stored data goes to the option input name argument, otherwise it goes to the default results_model.json
-
+```shell
 (venv) ~/code-generation-ngram-model $ python model_controller.py [input txt file] [optional: file name]
-
+```
 (2) Example run of N-gram Demo
-
+```shell
 (venv) ~/code-generation-ngram-model $ python model_controller.py all_tokens.txt
-
+```
+or
+```shell
+(venv) ~/code-generation-ngram-model $ python model_controller.py training.txt
+```
 
 ### 3. Report
 
