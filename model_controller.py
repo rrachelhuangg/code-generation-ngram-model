@@ -28,12 +28,12 @@ nargs = len(args)
 file_txt = None
 outfile  = 'results_model.json'
 
-if nargs < 2:
+if nargs == 1:
     sys.exit("No File Given")
-if nargs < 3:
-    file_txt = open(args[2], "r").read()
-if nargs < 4:
-    outfile = args[3] + ".json"
+if nargs >= 2:
+    file_txt = open(args[1], "r").read()
+if nargs >= 3:
+    outfile = args[2] + ".json"
 
 method_agg = file_txt.split('\n')
 
