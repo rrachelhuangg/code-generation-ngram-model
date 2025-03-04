@@ -22,7 +22,7 @@ This project explores **code completion in Java**, leveraging **N-gram language 
 
 ## **2. Getting Started**  
 
-This project is implemented in **Python 3.9+** and is compatible with **macOS, Linux, and Windows**.  
+This project is implemented in **Python 3.9+** and is compatible with **macOS, Linux, and Windows**. Our extracted data is available via [this](https://drive.google.com/drive/folders/1fAkrV63o_tZjk5eRHHE9x1NFYQeN-ZhA?usp=sharing)  google drive link. 
 
 ### **2.1 Preparations**  
 
