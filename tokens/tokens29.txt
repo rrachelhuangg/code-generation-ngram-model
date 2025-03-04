@@ -23,7 +23,7 @@ private static void add_edge_to_aet ( AetTree aet , EdgeNode edge ) { if ( aet .
 private static void add_to_sbtree ( ScanBeamTreeEntries sbte , float y ) { if ( sbte . sb_tree = = null ) { sbte . sb_tree = new ScanBeamTree ( y ) ; sbte . sbt_entries + + ; return ; } ScanBeamTree tree_node = sbte . sb_tree ; boolean done = false ; while ( ! done ) { 
 private static StNode add_st_edge ( StNode st , ItNodeTable it , EdgeNode edge , float dy ) { if ( st = = null ) { st . prev = add_st_edge ( st . prev , it , edge , dy ) ; } } return st ; } 
 private static ItNode add_intersection ( ItNode it_node , EdgeNode edge0 , EdgeNode edge1 , float x , float y ) { if ( it_node = = null ) { it_node . next = add_intersection ( it_node . next , edge0 , edge1 , x , y ) ; } } return it_node ; } 
-private static int count_tristrips ( PolygonNode tn ) { int total ; for ( total = 0 ; tn ! = null ; tn = tn . next ) { tif ( tn . active > 2 ) { ttotal + + ; } } return total ; } 
+private static int count_tristrips ( PolygonNode tn ) { int total ; for ( total = 0 ; tn ! = null ; tn = tn . next ) { if ( tn . active > 2 ) { ttotal + + ; } } return total ; } 
 private static VertexNode add_vertex ( VertexNode ve_node , float x , float y ) { if ( ve_node = = null ) { ve_node . next = add_vertex ( ve_node . next , x , y ) ; } return ve_node ; } 
 private static PolygonNode new_tristrip ( PolygonNode po_node , EdgeNode edge , float x , float y ) { if ( po_node = = null ) { po_node . next = new_tristrip ( po_node . next , edge , x , y ) ; } return po_node ; } 
 public void add_right ( float x , float y ) { VertexNode nv = new VertexNode ( x , y ) ; proxy . v [ RIGHT ] = nv ; } 
@@ -75,8 +75,8 @@ public RPolygon toPolygon ( ) { treturn new RPolygon ( this ) ; }
 public RShape toShape ( ) throws RuntimeException { tthrow new RuntimeException ( " Transforming a Contour to a Shape is not yet implemented. " ) ; } 
 public RMesh toMesh ( ) { return this . toPolygon ( ) . toMesh ( ) ; } 
 tvoid append ( RPoint nextpoint ) { RPoint [ ] newpoints ; if ( points = = null ) { tnewpoints = new RPoint [ 1 ] ; tnewpoints [ 0 ] = nextpoint ; } else { tnewpoints = new RPoint [ this . points . length + 1 ] ; tSystem . arraycopy ( this . points , 0 , newpoints , 0 , this . points . length ) ; tnewpoints [ this . points . length ] = nextpoint ; } this . points = newpoints ; } 
-public void setAlign ( int align ) throws RuntimeException { tif ( align ! = LEFT & & align ! = CENTER & & align ! = RIGHT ) { tthrow new RuntimeException ( " Alignement unknown. The only accepted values are: RFont.LEFT, RFont.CENTER and RFont.RIGHT " ) ; } tthis . align = align ; } 
-public RShape toShape ( char character ) { tRGroup grp = toGroup ( Character . toString ( character ) ) ; tif ( grp . countElements ( ) > 0 ) return ( RShape ) ( grp . elements [ 0 ] ) ; treturn new RShape ( ) ; } 
+public void setAlign ( int align ) throws RuntimeException { if ( align ! = LEFT & & align ! = CENTER & & align ! = RIGHT ) { tthrow new RuntimeException ( " Alignement unknown. The only accepted values are: RFont.LEFT, RFont.CENTER and RFont.RIGHT " ) ; } tthis . align = align ; } 
+public RShape toShape ( char character ) { tRGroup grp = toGroup ( Character . toString ( character ) ) ; if ( grp . countElements ( ) > 0 ) return ( RShape ) ( grp . elements [ 0 ] ) ; treturn new RShape ( ) ; } 
 public RPolygon toPolygon ( char character ) { treturn toShape ( character ) . toPolygon ( ) ; } 
 public RGroup toGroup ( String text ) throws RuntimeException { tRGroup result = new RGroup ( ) ; } 
 public void draw ( char character , PGraphics g ) throws RuntimeException { tthis . toShape ( character ) . draw ( g ) ; } 
@@ -138,15 +138,15 @@ public void scale ( float s , RPoint v ) { scale ( s , s , v . x , v . y ) ; }
 public void skewX ( float angle ) { apply ( 1 , ( float ) Math . tan ( angle ) , 0 , 0 , 1 , 0 ) ; } 
 public void skewY ( float angle ) { apply ( 1 , 0 , 0 , ( float ) Math . tan ( angle ) , 1 , 0 ) ; } 
 public void shear ( float shx , float shy ) { apply ( 1 , - shx , 0 , shy , 1 , 0 ) ; } 
-public int countStrips ( ) { tif ( this . strips = = null ) { treturn 0 ; } treturn this . strips . length ; } 
-public void addPoint ( RPoint p ) { tif ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ currentStrip ] . append ( p ) ; } 
-public void addPoint ( float x , float y ) { tif ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ currentStrip ] . append ( new RPoint ( x , y ) ) ; } 
-public void addPoint ( int indStrip , RPoint p ) { tif ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ indStrip ] . append ( p ) ; } 
-public void addPoint ( int indStrip , float x , float y ) { tif ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ indStrip ] . append ( new RPoint ( x , y ) ) ; } 
+public int countStrips ( ) { if ( this . strips = = null ) { treturn 0 ; } treturn this . strips . length ; } 
+public void addPoint ( RPoint p ) { if ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ currentStrip ] . append ( p ) ; } 
+public void addPoint ( float x , float y ) { if ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ currentStrip ] . append ( new RPoint ( x , y ) ) ; } 
+public void addPoint ( int indStrip , RPoint p ) { if ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ indStrip ] . append ( p ) ; } 
+public void addPoint ( int indStrip , float x , float y ) { if ( strips = = null ) { tthis . append ( new RStrip ( ) ) ; } tthis . strips [ indStrip ] . append ( new RPoint ( x , y ) ) ; } 
 public void draw ( PGraphics g ) { for ( int i = 0 ; i < this . countStrips ( ) ; i + + ) { g . beginShape ( g . TRIANGLE_STRIP ) ; 
 public void draw ( PApplet g ) { tfor ( int i = 0 ; i < this . countStrips ( ) ; i + + ) { tg . beginShape ( g . TRIANGLE_STRIP ) ; 
 public boolean isIn ( PGraphics g ) { tRContour c = getBounds ( ) ; tfloat x0 = g . screenX ( c . points [ 0 ] . x , c . points [ 0 ] . y ) ; tfloat y0 = g . screenY ( c . points [ 0 ] . x , c . points [ 0 ] . y ) ; tfloat x1 = g . screenX ( c . points [ 1 ] . x , c . points [ 1 ] . y ) ; tfloat y1 = g . screenY ( c . points [ 1 ] . x , c . points [ 1 ] . y ) ; tfloat x2 = g . screenX ( c . points [ 2 ] . x , c . points [ 2 ] . y ) ; tfloat y2 = g . screenY ( c . points [ 2 ] . x , c . points [ 2 ] . y ) ; tfloat x3 = g . screenX ( c . points [ 3 ] . x , c . points [ 3 ] . y ) ; tfloat y3 = g . screenY ( c . points [ 3 ] . x , c . points [ 3 ] . y ) ; treturn ( ( ( ( x0 > 0 & & x0 < g . width ) & & ( y0 > 0 & & y0 < g . height ) ) | | ( ( x1 > 0 & & x1 < g . width ) & & ( y1 > 0 & & y1 < g . height ) ) | | 
-public void transform ( RMatrix m ) { tint numStrips = countStrips ( ) ; tif ( numStrips ! = 0 ) { tfor ( int i = 0 ; i < numStrips ; i + + ) { 
+public void transform ( RMatrix m ) { tint numStrips = countStrips ( ) ; if ( numStrips ! = 0 ) { tfor ( int i = 0 ; i < numStrips ; i + + ) { 
 public RPolygon toPolygon ( ) throws RuntimeException { tthrow new RuntimeException ( " Transforming a Mesh to a Polygon is not yet implemented. " ) ; } 
 public RShape toShape ( ) throws RuntimeException { tthrow new RuntimeException ( " Transforming a Mesh to a Shape is not yet implemented. " ) ; } 
 tvoid append ( RStrip nextstrip ) { RStrip [ ] newstrips ; if ( strips = = null ) { tnewstrips = new RStrip [ 1 ] ; tnewstrips [ 0 ] = nextstrip ; tcurrentStrip = 0 ; } else { tnewstrips = new RStrip [ this . strips . length + 1 ] ; tSystem . arraycopy ( this . strips , 0 , newstrips , 0 , this . strips . length ) ; tnewstrips [ this . strips . length ] = nextstrip ; tcurrentStrip + + ; } this . strips = newstrips ; } 
@@ -158,7 +158,7 @@ public void rotate ( float angle , float vx , float vy ) { tfloat c = ( float ) 
 public void rotate ( float angle , RPoint v ) { tfloat c = ( float ) Math . cos ( angle ) ; tfloat s = ( float ) Math . sin ( angle ) ; tx - = v . x ; ty - = v . y ; tfloat tempx = x ; tfloat tempy = y ; tx = tempx * c - tempy * s ; ty = tempx * s + tempy * c ; tx + = v . x ; ty + = v . y ; } 
 public void scale ( float sx , float sy ) { tx * = sx ; ty * = sy ; } 
 public void scale ( RPoint s ) { tx * = s . x ; ty * = s . y ; } 
-public void normalize ( ) { tfloat norma = norm ( ) ; tif ( norma ! = 0 ) scale ( 1 / norma ) ; } 
+public void normalize ( ) { tfloat norma = norm ( ) ; if ( norma ! = 0 ) scale ( 1 / norma ) ; } 
 public void add ( RPoint p ) { tx + = p . x ; ty + = p . y ; } 
 public float mult ( RPoint p ) { treturn ( x * p . x + y * p . y ) ; } 
 public RPoint cross ( RPoint p ) { treturn new RPoint ( x * p . y - p . x * y , y * p . x - p . y * x ) ; } 
@@ -177,14 +177,14 @@ static public RPolygon createRing ( float x , float y , float radiusBig , float 
 tstatic public RPolygon createRing ( float radiusBig , float radiusSmall , int detail ) { treturn createRing ( 0 , 0 , radiusBig , radiusSmall , detail ) ; } 
 tstatic public RPolygon createRing ( float x , float y , float radiusBig , float radiusSmall ) { treturn createRing ( x , y , radiusBig , radiusSmall , defaultDetail ) ; } 
 tstatic public RPolygon createRing ( float radiusBig , float radiusSmall ) { treturn createRing ( 0 , 0 , radiusBig , radiusSmall , defaultDetail ) ; } 
-public int countContours ( ) { tif ( this . contours = = null ) { treturn 0 ; } treturn this . contours . length ; } 
+public int countContours ( ) { if ( this . contours = = null ) { treturn 0 ; } treturn this . contours . length ; } 
 public void addContour ( ) { tthis . append ( new RContour ( ) ) ; } 
-public void addPoint ( RPoint p ) { tif ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ currentContour ] . append ( p ) ; } 
-public void addPoint ( float x , float y ) { tif ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ currentContour ] . append ( new RPoint ( x , y ) ) ; } 
-public void addPoint ( int indContour , RPoint p ) { tif ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ indContour ] . append ( p ) ; } 
-public void addPoint ( int indContour , float x , float y ) { tif ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ indContour ] . append ( new RPoint ( x , y ) ) ; } 
+public void addPoint ( RPoint p ) { if ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ currentContour ] . append ( p ) ; } 
+public void addPoint ( float x , float y ) { if ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ currentContour ] . append ( new RPoint ( x , y ) ) ; } 
+public void addPoint ( int indContour , RPoint p ) { if ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ indContour ] . append ( p ) ; } 
+public void addPoint ( int indContour , float x , float y ) { if ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ indContour ] . append ( new RPoint ( x , y ) ) ; } 
 public void addClose ( ) { if ( contours = = null ) { return ; } contours [ contours . length - 1 ] . addClose ( ) ; } 
-public RMesh toMesh ( ) { tif ( contours = = null ) { treturn new RMesh ( ) ; } tRMesh mesh = RClip . polygonToMesh ( this ) ; mesh . texture = this . texture ; mesh . id = this . id ; return mesh ; } 
+public RMesh toMesh ( ) { if ( contours = = null ) { treturn new RMesh ( ) ; } tRMesh mesh = RClip . polygonToMesh ( this ) ; mesh . texture = this . texture ; mesh . id = this . id ; return mesh ; } 
 public RShape toShape ( ) throws RuntimeException { tthrow new RuntimeException ( " Transforming a Polygon to a Shape is not yet implemented. " ) ; } 
 public void draw ( PGraphics g ) { int numContours = countContours ( ) ; if ( numContours ! = 0 ) { if ( isIn ( g ) ) { 
 public void draw ( PApplet g ) { int numContours = countContours ( ) ; if ( numContours ! = 0 ) { if ( isIn ( g ) ) { 
@@ -195,10 +195,10 @@ public RPolygon union ( RPolygon p ) { treturn RClip . union ( p , this ) ; }
 public RPolygon xor ( RPolygon p ) { treturn RClip . xor ( p , this ) ; } 
 public RPolygon diff ( RPolygon p ) { treturn RClip . diff ( this , p ) ; } 
 public RPolygon update ( ) { treturn RClip . update ( this ) ; } 
-tvoid add ( float x , float y ) { tif ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ 0 ] . append ( new RPoint ( x , y ) ) ; } 
-tvoid add ( RPoint p ) { tif ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ 0 ] . append ( p ) ; } 
+tvoid add ( float x , float y ) { if ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ 0 ] . append ( new RPoint ( x , y ) ) ; } 
+tvoid add ( RPoint p ) { if ( contours = = null ) { tthis . append ( new RContour ( ) ) ; } tthis . contours [ 0 ] . append ( p ) ; } 
 tvoid add ( RContour c ) { tthis . append ( c ) ; } 
-tboolean isHole ( ) { tif ( this . contours = = null | | this . contours . length > 1 ) { tthrow new IllegalStateException ( " Cannot call on a poly made up of more than one poly. " ) ; } treturn this . contours [ 0 ] . isHole ; } 
+tboolean isHole ( ) { if ( this . contours = = null | | this . contours . length > 1 ) { tthrow new IllegalStateException ( " Cannot call on a poly made up of more than one poly. " ) ; } treturn this . contours [ 0 ] . isHole ; } 
 tboolean isContributing ( int polyIndex ) { treturn this . contours [ polyIndex ] . isContributing ; } 
 tvoid append ( RContour nextcontour ) { RContour [ ] newcontours ; if ( contours = = null ) { tnewcontours = new RContour [ 1 ] ; tnewcontours [ 0 ] = nextcontour ; tcurrentContour = 0 ; } else { tnewcontours = new RContour [ this . contours . length + 1 ] ; tSystem . arraycopy ( this . contours , 0 , newcontours , 0 , this . contours . length ) ; tnewcontours [ this . contours . length ] = nextcontour ; tcurrentContour + + ; } this . contours = newcontours ; } 
 public void draw ( String filename , PGraphics g ) { this . toGroup ( filename ) . draw ( g ) ; } 
@@ -217,13 +217,13 @@ public RShape elemToShape ( XMLElement elem ) { return getShape ( elem . getStri
 static public RShape createRect ( float x , float y , float w , float h ) { tRShape rect = new RShape ( ) ; trect . addMoveTo ( x , y ) ; trect . addLineTo ( x + w , y ) ; trect . addLineTo ( x + w , y + h ) ; trect . addLineTo ( x , y + h ) ; trect . addLineTo ( x , y ) ; treturn rect ; } 
 static public RShape createEllipse ( float x , float y , float rx , float ry ) { tRPoint center = new RPoint ( x , y ) ; tRShape circle = new RShape ( ) ; tfloat kx = ( ( ( 8F / ( float ) Math . sqrt ( 2F ) ) - 4F ) / 3F ) * rx ; tfloat ky = ( ( ( 8F / ( float ) Math . sqrt ( 2F ) ) - 4F ) / 3F ) * ry ; tcircle . addMoveTo ( center . x , center . y - ry ) ; tcircle . addBezierTo ( center . x + kx , center . y - ry , center . x + rx , center . y - ky , center . x + rx , center . y ) ; tcircle . addBezierTo ( center . x + rx , center . y + ky , center . x + kx , center . y + ry , center . x , center . y + ry ) ; tcircle . addBezierTo ( center . x - kx , center . y + ry , center . x - rx , center . y + ky , center . x - rx , center . y ) ; tcircle . addBezierTo ( center . x - rx , center . y - ky , center . x - kx , center . y - ry , center . x , center . y - ry ) ; circle . addClose ( ) ; treturn circle ; } 
 static public RShape createCircle ( float x , float y , float r ) { return createEllipse ( x , y , r , r ) ; } 
-public int countSubshapes ( ) { tif ( this . subshapes = = null ) { treturn 0 ; } treturn this . subshapes . length ; } 
+public int countSubshapes ( ) { if ( this . subshapes = = null ) { treturn 0 ; } treturn this . subshapes . length ; } 
 public void addShape ( RShape s ) { tfor ( int i = 0 ; i < s . countSubshapes ( ) ; i + + ) { tthis . append ( s . subshapes [ i ] ) ; 
 public void addSubshape ( ) { tthis . append ( new RSubshape ( ) ) ; } 
-public void addMoveTo ( float endx , float endy ) { tif ( subshapes = = null ) { tthis . append ( new RSubshape ( endx , endy ) ) ; 
-public void addLineTo ( float endx , float endy ) { tif ( subshapes = = null ) { tthis . append ( new RSubshape ( ) ) ; } tthis . subshapes [ currentSubshape ] . addLineTo ( endx , endy ) ; } 
-public void addQuadTo ( float cp1x , float cp1y , float endx , float endy ) { tif ( subshapes = = null ) { tthis . append ( new RSubshape ( ) ) ; } tthis . subshapes [ currentSubshape ] . addQuadTo ( cp1x , cp1y , endx , endy ) ; } 
-public void addBezierTo ( float cp1x , float cp1y , float cp2x , float cp2y , float endx , float endy ) { tif ( subshapes = = null ) { tthis . append ( new RSubshape ( ) ) ; } tthis . subshapes [ currentSubshape ] . addBezierTo ( cp1x , cp1y , cp2x , cp2y , endx , endy ) ; } 
+public void addMoveTo ( float endx , float endy ) { if ( subshapes = = null ) { tthis . append ( new RSubshape ( endx , endy ) ) ; 
+public void addLineTo ( float endx , float endy ) { if ( subshapes = = null ) { tthis . append ( new RSubshape ( ) ) ; } tthis . subshapes [ currentSubshape ] . addLineTo ( endx , endy ) ; } 
+public void addQuadTo ( float cp1x , float cp1y , float endx , float endy ) { if ( subshapes = = null ) { tthis . append ( new RSubshape ( ) ) ; } tthis . subshapes [ currentSubshape ] . addQuadTo ( cp1x , cp1y , endx , endy ) ; } 
+public void addBezierTo ( float cp1x , float cp1y , float cp2x , float cp2y , float endx , float endy ) { if ( subshapes = = null ) { tthis . append ( new RSubshape ( ) ) ; } tthis . subshapes [ currentSubshape ] . addBezierTo ( cp1x , cp1y , cp2x , cp2y , endx , endy ) ; } 
 public void addClose ( ) { if ( subshapes = = null ) { this . append ( new RSubshape ( ) ) ; } this . subshapes [ currentSubshape ] . addClose ( ) ; } 
 public RMesh toMesh ( ) { tRPolygon p = this . toPolygon ( ) ; treturn p . toMesh ( ) ; } 
 public RPolygon toPolygon ( ) { tint numSubshapes = countSubshapes ( ) ; tRPolygon result = new RPolygon ( ) ; tfor ( int i = 0 ; i < numSubshapes ; i + + ) { tRPoint [ ] newpoints = this . subshapes [ i ] . getCurvePoints ( ) ; tresult . addContour ( new RContour ( newpoints ) ) ; } result . texture = this . texture ; result . id = this . id ; treturn result ; } 
@@ -231,10 +231,10 @@ public void print ( ) { System . out . println ( " subshapes: " ) ; for ( int i 
 public void draw ( PGraphics g ) { int numSubshapes = countSubshapes ( ) ; if ( numSubshapes ! = 0 ) { if ( isIn ( g ) ) { 
 public void draw ( PApplet g ) { int numSubshapes = countSubshapes ( ) ; if ( numSubshapes ! = 0 ) { if ( isIn ( g ) ) { 
 tvoid append ( RSubshape nextsubshape ) { RSubshape [ ] newsubshapes ; if ( subshapes = = null ) { tnewsubshapes = new RSubshape [ 1 ] ; tnewsubshapes [ 0 ] = nextsubshape ; tcurrentSubshape = 0 ; } else { tnewsubshapes = new RSubshape [ this . subshapes . length + 1 ] ; tSystem . arraycopy ( this . subshapes , 0 , newsubshapes , 0 , this . subshapes . length ) ; tnewsubshapes [ this . subshapes . length ] = nextsubshape ; tcurrentSubshape + + ; } this . subshapes = newsubshapes ; } 
-public int countVertices ( ) { tif ( this . vertices = = null ) { treturn 0 ; } treturn this . vertices . length ; } 
+public int countVertices ( ) { if ( this . vertices = = null ) { treturn 0 ; } treturn this . vertices . length ; } 
 public void draw ( PGraphics g ) { tint numVertices = countVertices ( ) ; tg . beginShape ( g . TRIANGLE_STRIP ) ; tfor ( int i = 0 ; i < numVertices ; i + + ) { tg . vertex ( vertices [ i ] . x , vertices [ i ] . y ) ; } tg . endShape ( ) ; } 
 public void addVertex ( float x , float y ) { tthis . append ( new RPoint ( x , y ) ) ; } 
-public void transform ( RMatrix m ) { tint numVertices = countVertices ( ) ; tif ( numVertices ! = 0 ) { tfor ( int i = 0 ; i < numVertices ; i + + ) { 
+public void transform ( RMatrix m ) { tint numVertices = countVertices ( ) ; if ( numVertices ! = 0 ) { tfor ( int i = 0 ; i < numVertices ; i + + ) { 
 tvoid add ( float x , float y ) { tthis . append ( new RPoint ( x , y ) ) ; } 
 tvoid append ( RPoint nextvertex ) { RPoint [ ] newvertices ; if ( vertices = = null ) { tnewvertices = new RPoint [ 1 ] ; tnewvertices [ 0 ] = nextvertex ; } else { tnewvertices = new RPoint [ this . vertices . length + 1 ] ; tSystem . arraycopy ( this . vertices , 0 , newvertices , 0 , this . vertices . length ) ; tnewvertices [ this . vertices . length ] = nextvertex ; } this . vertices = newvertices ; } 
 public int countCommands ( ) { if ( this . commands = = null ) { return 0 ; } return this . commands . length ; } 
@@ -259,7 +259,7 @@ public RGroup elemToGroup ( XMLElement elem ) { RGroup grp = new RGroup ( ) ; XM
 protected void read ( byte [ ] fontInBytes ) { tbs = fontInBytes ; try { RandomAccessFileEmulator raf = new RandomAccessFileEmulator ( bs , " r " ) ; 
 public static Font create ( ) { return new Font ( ) ; } 
 public static Font create ( byte [ ] fontInBytes ) { Font f = new Font ( ) ; f . read ( fontInBytes ) ; return f ; } 
-public void scale ( float factor ) { tif ( points ! = null ) { tfor ( int i = 0 ; i < points . length ; i + + ) { tpoints [ i ] . x * = factor ; tpoints [ i ] . y * = - factor ; } } tleftSideBearing = ( short ) ( ( float ) leftSideBearing * factor ) ; tadvanceWidth = ( int ) ( ( float ) advanceWidth * factor ) ; } 
+public void scale ( float factor ) { if ( points ! = null ) { tfor ( int i = 0 ; i < points . length ; i + + ) { tpoints [ i ] . x * = factor ; tpoints [ i ] . y * = - factor ; } } tleftSideBearing = ( short ) ( ( float ) leftSideBearing * factor ) ; tadvanceWidth = ( int ) ( ( float ) advanceWidth * factor ) ; } 
 public void seek ( long ) throws IOException { treset ( ) ; tskip ( ) ; } 
 public abstract int getFormat ( ) ; protected static ClassDef read ( RandomAccessFileEmulator raf ) throws IOException { ClassDef c = null ; int format = raf . readUnsignedShort ( ) ; if ( format = = 1 ) { c = new ClassDefFormat1 ( raf ) ; } else if ( format = = 2 ) { c = new ClassDefFormat2 ( raf ) ; } return c ; } } 
 protected static ClassDef read ( RandomAccessFileEmulator raf ) throws IOException { ClassDef c = null ; int format = raf . readUnsignedShort ( ) ; if ( format = = 1 ) { c = new ClassDefFormat1 ( raf ) ; } else if ( format = = 2 ) { c = new ClassDefFormat2 ( raf ) ; } return c ; } 
@@ -344,7 +344,7 @@ private static void add_edge_to_aet ( AetTree aet , EdgeNode edge ) { if ( aet .
 private static void add_to_sbtree ( ScanBeamTreeEntries sbte , float y ) { if ( sbte . sb_tree = = null ) { sbte . sb_tree = new ScanBeamTree ( y ) ; sbte . sbt_entries + + ; return ; } ScanBeamTree tree_node = sbte . sb_tree ; boolean done = false ; while ( ! done ) { 
 private static StNode add_st_edge ( StNode st , ItNodeTable it , EdgeNode edge , float dy ) { if ( st = = null ) { st . prev = add_st_edge ( st . prev , it , edge , dy ) ; } } return st ; } 
 private static ItNode add_intersection ( ItNode it_node , EdgeNode edge0 , EdgeNode edge1 , float x , float y ) { if ( it_node = = null ) { it_node . next = add_intersection ( it_node . next , edge0 , edge1 , x , y ) ; } } return it_node ; } 
-private static int count_tristrips ( PolygonNode tn ) { int total ; for ( total = 0 ; tn ! = null ; tn = tn . next ) { tif ( tn . active > 2 ) { total + + ; } } return total ; } 
+private static int count_tristrips ( PolygonNode tn ) { int total ; for ( total = 0 ; tn ! = null ; tn = tn . next ) { if ( tn . active > 2 ) { total + + ; } } return total ; } 
 private static VertexNode add_vertex ( VertexNode ve_node , float x , float y ) { if ( ve_node = = null ) { ve_node . next = add_vertex ( ve_node . next , x , y ) ; } return ve_node ; } 
 private static PolygonNode new_tristrip ( PolygonNode po_node , EdgeNode edge , float x , float y ) { if ( po_node = = null ) { po_node . next = new_tristrip ( po_node . next , edge , x , y ) ; } return po_node ; } 
 public void add_right ( float x , float y ) { VertexNode nv = new VertexNode ( x , y ) ; proxy . v [ RIGHT ] = nv ; } 

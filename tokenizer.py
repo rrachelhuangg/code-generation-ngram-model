@@ -110,28 +110,32 @@ for data_file in os.listdir("extracted"):
         total_methods += len(data)
 
         lexer = JavaLexer()
-        temp = 0
         with open(f"tokens/tokens{count}.txt", "w") as file:
             for index, row in data.iterrows():
                 row_string = str(row)
                 method = row_string[row_string.find("Method Java")+11:row_string.find("Name:")].strip()
                 tokens = [t[1] for t in lexer.get_tokens(method)]
                 concat_tokens = ""
+                token_count = 0
                 for t in tokens:
                     if t not in ["\\", "n", "\n", "t", "\t"] and len(t) > 0:
-                        if t[0]=="t" and len(t)>1:
-                            concat_tokens += (t[1:] + " ")
+                        if "private" in t and t[0]=="t":
+                            concat_tokens += (t[1:]+" ")
+                        elif "public" in t and t[0]=="t":
+                            concat_tokens += (t[1:]+" ")
+                        elif "protected" in t and t[0]=="t":
+                            concat_tokens += (t[1:]+" ")
+                        elif "out" in t and t[0]=="t":
+                            concat_tokens += (t[1:]+" ")
+                        elif "if" in t and t[0]=="t":
+                            concat_tokens += (t[1:]+" ")
                         else:
                             concat_tokens += (t+" ")
                 for regex in [r"\/\s*(\*)+.*(\*)+\s*\/",r"\/\/.*\\t+", r"\\t",r"\\n", r"\/\/"]:
                     concat_tokens = re.sub(regex, "", concat_tokens)
                 concat_tokens = re.sub(r"\s{2,}"," ", concat_tokens)
-                # file.write("<beg> " + concat_tokens + " <end> ")
                 file.write(concat_tokens + "\n")
-                temp +=1
         count += 1
-
-print("METHOD COUNT: ", temp)
 
 for tokens_file in os.listdir("tokens"):
     with open(f"all_tokens.txt", "w") as file:
