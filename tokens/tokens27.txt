@@ -1,240 +1,240 @@
-public boolean inField ( ) { return rue ; } 
-public boolean inConstructor ( ) { return rue ; } 
-public boolean inMethod ( ) { return rue ; } 
-public boolean inOverview ( ) { return rue ; } 
-public boolean inPackage ( ) { return rue ; } 
-public boolean inType ( ) { return rue ; } 
+public boolean inField ( ) { return true ; } 
+public boolean inConstructor ( ) { return true ; } 
+public boolean inMethod ( ) { return true ; } 
+public boolean inOverview ( ) { return true ; } 
+public boolean inPackage ( ) { return true ; } 
+public boolean inType ( ) { return true ; } 
 public boolean isInlineTag ( ) { return false ; } 
-public static void register ( Map agletMap ) { ExampleTaglet ag = new ExampleTaglet ( ) ; Taglet = ( Taglet ) agletMap . get ( ag . getName ( ) ) ; if ( ! = null ) { agletMap . remove ( ag . getName ( ) ) ; } agletMap . put ( ag . getName ( ) , ag ) ; } 
-public String oString ( Tag ag ) { return createHTML ( readFile ( ag . ext ( ) ) ) ; } 
-public String oString ( Tag [ ] ags ) { if ( ags . length = = 0 ) { return null ; } return createHTML ( readFile ( ags [ 0 ] . ext ( ) ) ) ; } 
-String createHTML ( String heString ) { if ( heString ! = null ) { String dd = " <script type= \" ext/javascript \" > " + " <!-- " + " document.getElementsByTagName('html')[0].className = 'isjs'; " + " function toggle(dt) { var display, dd=dt; do{ dd = dd.nextSibling } while(dd.tagName!='DD'); toOpen =!dd.style.display; " + " dd.style.display = toOpen? 'block':''; dt.getElementsByTagName('span')[0].innerHTML = toOpen? '-':'+' ; } " + " --> n</script> " ; return dd + " n<div id= \" est \" class= \" oggleList \" > " + " <dl><dt onclick= \" oggle(this); \" ><span>+</span>Example</dt> " + " <dd><pre> " + heString + " </pre> " + " </dd></dl></div> " ; } return " " ; } 
-String readFile ( String heExample ) { String record = " " ; String myResult = " " ; int recCount = 0 ; String myDir = " ../examples " ; File file = new File ( myDir ) ; if ( file . exists ( ) = = false ) { myDir = " ./examples " ; } ry { FileReader fr = new FileReader ( myDir + " / " + heExample + " / " + heExample + " .pde " ) ; BufferedReader br = new BufferedReader ( fr ) ; record = new String ( ) ; while ( ( record = br . readLine ( ) ) ! = null ) { myResult + = record + " " ; } } catch ( IOException e ) { System . out . println ( e ) ; return null ; } return myResult ; } 
-public String version ( ) { return VERSION ; } 
-public void reset ( ) { center = startCenter ; distance = startDistance ; rotation = new Rotation ( ) ; feed ( ) ; } 
-private void mouseZoom ( final double delta ) { setDistance ( distance + delta * Math . sqrt ( distance * .2 ) ) ; } 
-private void mousePan ( final float dxMouse , final float dyMouse ) { final double panScale = Math . sqrt ( distance * .005 ) ; pan ( - dxMouse * panScale , dyMouse * panScale ) ; } 
-private void mouseRotate ( final float dx , final float dy ) { final Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; final double rotationScale = Math . sqrt ( distance * .05 ) ; final Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; rotateY ( Vector3D . angle ( u , vx ) * ( dx < 0 ? - 1 : 1 ) ) ; final Vector3D vy = u . add ( new Vector3D ( 0 , dy * rotationScale , 0 ) ) ; final double yAngle = Vector3D . angle ( u , vy ) * ( dy < 0 ? - 1 : 1 ) ; rotateX ( yAngle ) ; } 
-public void lookAt ( final double x , final double y , final double z ) { center = new Vector3D ( x , y , z ) ; } 
-public void feed ( ) { final Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; final Vector3D rup = rotation . applyTo ( UP ) ; p . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
-public void pan ( final double dx , final double dy ) { center = center . add ( rotation . applyTo ( new Vector3D ( dx , dy , 0 ) ) ) ; feed ( ) ; } 
-public void rotateX ( final double yAngle ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , yAngle ) ) ; feed ( ) ; } 
-public void rotateY ( final double angle ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , angle ) ) ; feed ( ) ; } 
-public void rotateZ ( final double angle ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , angle ) ) ; feed ( ) ; } 
+public static void register ( Map tagletMap ) { ExampleTaglet tag = new ExampleTaglet ( ) ; Taglet = ( Taglet ) tagletMap . get ( tag . getName ( ) ) ; if ( ! = null ) { tagletMap . remove ( tag . getName ( ) ) ; } tagletMap . put ( tag . getName ( ) , tag ) ; } 
+public String toString ( Tag tag ) { return createHTML ( readFile ( tag . text ( ) ) ) ; } 
+public String toString ( Tag [ ] tags ) { if ( tags . length = = 0 ) { return null ; } treturn createHTML ( readFile ( tags [ 0 ] . text ( ) ) ) ; } 
+String createHTML ( String theString ) { tif ( theString ! = null ) { String dd = " <script type= \" text/javascript \" > " + " <!-- " + " document.getElementsByTagName('html')[0].className = 'isjs'; " + " function toggle(dt) { var display, dd=dt; do{ dd = dd.nextSibling } while(dd.tagName!='DD'); toOpen =!dd.style.display; " + " dd.style.display = toOpen? 'block':''; dt.getElementsByTagName('span')[0].innerHTML = toOpen? '-':'+' ; } " + " --> n</script> " ; treturn dd + " n<div id= \" test \" class= \" toggleList \" > " + " <dl><dt onclick= \" toggle(this); \" ><span>+</span>Example</dt> " + " <dd><pre> " + theString + " </pre> " + " </dd></dl></div> " ; } treturn " " ; } 
+String readFile ( String theExample ) { tString record = " " ; tString myResult = " " ; tint recCount = 0 ; tString myDir = " ../examples " ; tFile file = new File ( myDir ) ; tif ( file . exists ( ) = = false ) { tmyDir = " ./examples " ; } try { tFileReader fr = new FileReader ( myDir + " / " + theExample + " / " + theExample + " .pde " ) ; tBufferedReader br = new BufferedReader ( fr ) ; trecord = new String ( ) ; twhile ( ( record = br . readLine ( ) ) ! = null ) { tmyResult + = record + " " ; } } catch ( IOException e ) { tSystem . out . println ( e ) ; treturn null ; } treturn myResult ; } 
+public String version ( ) { treturn VERSION ; } 
+public void reset ( ) { tcenter = startCenter ; tdistance = startDistance ; trotation = new Rotation ( ) ; tfeed ( ) ; } 
+private void mouseZoom ( final double delta ) { tsetDistance ( distance + delta * Math . sqrt ( distance * .2 ) ) ; } 
+private void mousePan ( final float dxMouse , final float dyMouse ) { tfinal double panScale = Math . sqrt ( distance * .005 ) ; tpan ( - dxMouse * panScale , dyMouse * panScale ) ; } 
+private void mouseRotate ( final float dx , final float dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; tfinal double rotationScale = Math . sqrt ( distance * .05 ) ; tfinal Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; trotateY ( Vector3D . angle ( u , vx ) * ( dx < 0 ? - 1 : 1 ) ) ; tfinal Vector3D vy = u . add ( new Vector3D ( 0 , dy * rotationScale , 0 ) ) ; tfinal double yAngle = Vector3D . angle ( u , vy ) * ( dy < 0 ? - 1 : 1 ) ; trotateX ( yAngle ) ; } 
+public void lookAt ( final double x , final double y , final double z ) { tcenter = new Vector3D ( x , y , z ) ; } 
+public void feed ( ) { tfinal Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; tfinal Vector3D rup = rotation . applyTo ( UP ) ; tp . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
+public void pan ( final double dx , final double dy ) { tcenter = center . add ( rotation . applyTo ( new Vector3D ( dx , dy , 0 ) ) ) ; tfeed ( ) ; } 
+public void rotateX ( final double yAngle ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , yAngle ) ) ; tfeed ( ) ; } 
+public void rotateY ( final double angle ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , angle ) ) ; tfeed ( ) ; } 
+public void rotateZ ( final double angle ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , angle ) ) ; tfeed ( ) ; } 
 private static String buildMessage ( String pattern , Object [ ] arguments , Locale locale ) { do it the hard way, for Java 1.3. compatibility MessageFormat mf = new MessageFormat(translate(pattern, locale)); mf.setLocale(locale); return mf.format(arguments); } 
 public void printStackTrace ( ) { printStackTrace ( System . err ) ; } 
 public void printStackTrace ( PrintStream out ) { synchronized ( out ) { PrintWriter pw = new PrintWriter ( out , false ) ; 
 public void printStackTrace ( PrintWriter out ) { synchronized ( out ) { super . printStackTrace ( out ) ; 
 public Rotation revert ( ) { return new Rotation ( - q0 , q1 , q2 , q3 , false ) ; } 
-public double [ ] getAngles ( RotationOrder order ) hrows CardanEulerSingularityException { if ( order = = RotationOrder . XYZ ) { 
+public double [ ] getAngles ( RotationOrder order ) throws CardanEulerSingularityException { if ( order = = RotationOrder . XYZ ) { 
 public Vector3D applyTo ( Vector3D u ) { double x = u . getX ( ) ; double y = u . getY ( ) ; double z = u . getZ ( ) ; double s = q1 * x + q2 * y + q3 * z ; return new Vector3D ( 2 * ( q0 * ( x * q0 - ( q2 * z - q3 * y ) ) + s * q1 ) - x , 2 * ( q0 * ( y * q0 - ( q3 * x - q1 * z ) ) + s * q2 ) - y , 
 public Vector3D applyInverseTo ( Vector3D u ) { double x = u . getX ( ) ; double y = u . getY ( ) ; double z = u . getZ ( ) ; double s = q1 * x + q2 * y + q3 * z ; double m0 = - q0 ; return new Vector3D ( 2 * ( m0 * ( x * m0 - ( q2 * z - q3 * y ) ) + s * q1 ) - x , 2 * ( m0 * ( y * m0 - ( q3 * x - q1 * z ) ) + s * q2 ) - y , 
 public Rotation applyTo ( Rotation r ) { return new Rotation ( r . q0 * q0 - ( r . q1 * q1 + r . q2 * q2 + r . q3 * q3 ) , r . q1 * q0 + r . q0 * q1 + ( r . q2 * q3 - r . q3 * q2 ) , 
 public Rotation applyInverseTo ( Rotation r ) { return new Rotation ( - r . q0 * q0 - ( r . q1 * q1 + r . q2 * q2 + r . q3 * q3 ) , - r . q1 * q0 + r . q0 * q1 + ( r . q2 * q3 - r . q3 * q2 ) , 
-public String oString ( ) { return name ; } 
+public String toString ( ) { return name ; } 
 public Vector3D add ( Vector3D v ) { return new Vector3D ( x + v . x , y + v . y , z + v . z ) ; } 
 public Vector3D add ( double factor , Vector3D v ) { return new Vector3D ( x + factor * v . x , y + factor * v . y , z + factor * v . z ) ; } 
 public Vector3D subtract ( Vector3D v ) { return new Vector3D ( x - v . x , y - v . y , z - v . z ) ; } 
 public Vector3D subtract ( double factor , Vector3D v ) { return new Vector3D ( x - factor * v . x , y - factor * v . y , z - factor * v . z ) ; } 
-public Vector3D normalize ( ) { double s = getNorm ( ) ; if ( s = = 0 ) { hrow new ArithmeticException ( " cannot normalize a zero norm vector " ) ; } return scalarMultiply ( 1 / s ) ; } 
-public Vector3D orthogonal ( ) { double hreshold = 0.6 * getNorm ( ) ; if ( hreshold = = 0 ) { hrow new ArithmeticException ( " null norm " ) ; } if ( ( x > = - hreshold ) & & ( x < = hreshold ) ) { double inverse = 1 / Math . sqrt ( y * y + z * z ) ; return new Vector3D ( 0 , inverse * z , - inverse * y ) ; } else if ( ( y > = - hreshold ) & & ( y < = hreshold ) ) { double inverse = 1 / Math . sqrt ( x * x + z * z ) ; return new Vector3D ( - inverse * z , 0 , inverse * x ) ; } double inverse = 1 / Math . sqrt ( x * x + y * y ) ; return new Vector3D ( inverse * y , - inverse * x , 0 ) ; 
-public static double angle ( Vector3D v1 , Vector3D v2 ) { double normProduct = v1 . getNorm ( ) * v2 . getNorm ( ) ; if ( normProduct = = 0 ) { hrow new ArithmeticException ( " null norm " ) ; } double dot = dotProduct ( v1 , v2 ) ; double hreshold = normProduct * 0.9999 ; if ( ( dot < - hreshold ) | | ( dot > hreshold ) ) { the vectors are almost aligned, compute using the sine Vector3D v3 = crossProduct(v1, v2); if (dot >= 0) { return Math.asin(v3.getNorm() / normProduct); } return Math.PI - Math.asin(v3.getNorm() / normProduct); } the vectors are sufficiently separated to use the cosine return Math.acos(dot / normProduct); 
+public Vector3D normalize ( ) { double s = getNorm ( ) ; if ( s = = 0 ) { throw new ArithmeticException ( " cannot normalize a zero norm vector " ) ; } return scalarMultiply ( 1 / s ) ; } 
+public Vector3D orthogonal ( ) { double threshold = 0.6 * getNorm ( ) ; if ( threshold = = 0 ) { throw new ArithmeticException ( " null norm " ) ; } if ( ( x > = - threshold ) & & ( x < = threshold ) ) { double inverse = 1 / Math . sqrt ( y * y + z * z ) ; return new Vector3D ( 0 , inverse * z , - inverse * y ) ; } else if ( ( y > = - threshold ) & & ( y < = threshold ) ) { double inverse = 1 / Math . sqrt ( x * x + z * z ) ; return new Vector3D ( - inverse * z , 0 , inverse * x ) ; } double inverse = 1 / Math . sqrt ( x * x + y * y ) ; return new Vector3D ( inverse * y , - inverse * x , 0 ) ; 
+public static double angle ( Vector3D v1 , Vector3D v2 ) { double normProduct = v1 . getNorm ( ) * v2 . getNorm ( ) ; if ( normProduct = = 0 ) { throw new ArithmeticException ( " null norm " ) ; } double dot = dotProduct ( v1 , v2 ) ; double threshold = normProduct * 0.9999 ; if ( ( dot < - threshold ) | | ( dot > threshold ) ) { the vectors are almost aligned, compute using the sine Vector3D v3 = crossProduct(v1, v2); if (dot >= 0) { return Math.asin(v3.getNorm() / normProduct); } return Math.PI - Math.asin(v3.getNorm() / normProduct); } the vectors are sufficiently separated to use the cosine return Math.acos(dot / normProduct); 
 public Vector3D negate ( ) { return new Vector3D ( - x , - y , - z ) ; } 
 public Vector3D scalarMultiply ( double a ) { return new Vector3D ( a * x , a * y , a * z ) ; } 
 public static double dotProduct ( Vector3D v1 , Vector3D v2 ) { return v1 . x * v2 . x + v1 . y * v2 . y + v1 . z * v2 . z ; } 
 public static Vector3D crossProduct ( Vector3D v1 , Vector3D v2 ) { return new Vector3D ( v1 . y * v2 . z - v1 . z * v2 . y , v1 . z * v2 . x - v1 . x * v2 . z , 
-public void keyEvent ( final KeyEvent e ) { if ( e . getID ( ) = = KeyEvent . KEY_RELEASED & & e . getKeyCode ( ) = = KeyEvent . VK_SHIFT ) dragConstraint = null ; 
-private void mousePan ( final float dxMouse , final float dyMouse ) { final double panScale = Math . sqrt ( distance * .005 ) ; pan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , dragConstraint = = Constraint . X ? 0 : dyMouse * panScale ) ; 
-private void mouseRotate ( final float dx , final float dy ) { final Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; final double rotationScale = Math . sqrt ( distance * .05 ) ; if ( dragConstraint ! = Constraint . Y ) { final Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; rotateY ( Vector3D . angle ( u , vx ) * ( dx < 0 ? - 1 : 1 ) ) ; } if ( dragConstraint ! = Constraint . X ) { 
-private void mousePan ( final double dxMouse , final double dyMouse ) { final double panScale = Math . sqrt ( distance * .005 ) ; pan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , dragConstraint = = Constraint . X ? 0 : dyMouse * panScale ) ; 
-private void mouseRotate ( final double dx , final double dy ) { final Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; final double rotationScale = Math . sqrt ( distance * .05 ) ; if ( dragConstraint ! = Constraint . Y ) { final Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; rotateY ( Vector3D . angle ( u , vx ) * ( dx < 0 ? - 1 : 1 ) ) ; } if ( dragConstraint ! = Constraint . X ) { 
-public void draw ( ) { double = ( p . millis ( ) - start ) / 150.0 ; if ( > = 1 ) { p . unregisterDraw ( his ) ; return ; } rotation = RotationUtil . slerp ( startRot , endRot , ) ; center = new Vector3D ( c . getX ( ) * ( 1 - ) + startCenter . getX ( ) * , c . getY ( ) * ( 1 - ) + startCenter . getY ( ) * , c . getZ ( ) * ( 1 - ) + startCenter . getZ ( ) * ) ; distance = sd * ( 1 - ) + startDistance * ; feed ( ) ; } 
-public void reset ( ) { p . registerDraw ( new Interp ( ) ) ; feed ( ) ; } 
-static public Rotation slerp ( final Rotation a , final Rotation b , final double ) { double cosTheta = a . getQ0 ( ) * b . getQ0 ( ) + a . getQ1 ( ) * b . getQ1 ( ) + a . getQ2 ( ) * b . getQ2 ( ) + a . getQ3 ( ) * b . getQ3 ( ) ; double heta = Math . acos ( cosTheta ) ; double sinTheta = Math . sin ( heta ) ; double w1 , w2 ; if ( sinTheta > 0.001f ) { w1 = Math . sin ( ( 1.0f - ) * heta ) / sinTheta ; w2 = Math . sin ( * heta ) / sinTheta ; } else { w1 = 1.0 - ; w2 = ; } return new Rotation ( w1 * a . getQ0 ( ) + w2 * b . getQ0 ( ) , w1 * a . getQ1 ( ) + w2 * b . getQ1 ( ) , w1 * a . getQ2 ( ) + w2 * b . getQ2 ( ) , w1 * a . getQ3 ( ) + w2 
-static public double linear ( final double a , final double b , final double ) { return a + ( b - a ) * ; } 
-static public Vector3D linear ( final Vector3D a , final Vector3D b , final double ) { return new Vector3D ( linear ( a . getX ( ) , b . getX ( ) , ) , linear ( a . getY ( ) , b . getY ( ) , ) , linear ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
-public void draw ( ) { double = ( p . millis ( ) - start ) / 300.0 ; if ( > = 1 ) { p . unregisterDraw ( his ) ; return ; } rotation = slerp ( startRot , endRot , ) ; center = linear ( c , startCenter , ) ; distance = linear ( sd , startDistance , ) ; feed ( ) ; } 
-private static String buildMessage ( final String pattern , final Object [ ] arguments , final Locale locale ) { } 
-public void printStackTrace ( ) { printStackTrace ( System . err ) ; } 
-public void printStackTrace ( final PrintStream out ) { synchronized ( out ) { 
-public void printStackTrace ( final PrintWriter out ) { synchronized ( out ) { 
-public void draw ( ) { double = ( p . millis ( ) - start ) / 300.0 ; if ( > = 1 ) { rotation = endRot ; center = startCenter ; distance = startDistance ; p . unregisterDraw ( his ) ; return ; } rotation = slerp ( startRot , endRot , ) ; center = linear ( c , startCenter , ) ; distance = linear ( sd , startDistance , ) ; feed ( ) ; } 
-private void mousePan ( final double dxMouse , final double dyMouse ) { final double panScale = Math . sqrt ( distance * .005 ) ; pan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , dragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; 
-private void mouseRotate ( final double dx , final double dy ) { final Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; final double rotationScale = Math . sqrt ( distance * .05 ) ; if ( dragConstraint ! = Constraint . Y ) { final Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; rotateY ( Vector3D . angle ( u , vx ) * ( dx > 0 ? - 1 : 1 ) ) ; } if ( dragConstraint ! = Constraint . X ) { 
-public void lookAt ( final double x , final double y , final double z ) { center = new Vector3D ( x , y , z ) ; feed ( ) ; } 
-private void mouseRotate ( final double dx , final double dy ) { final Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; final double rotationScale = Math . sqrt ( distance * .05 ) ; if ( dragConstraint ! = Constraint . X ) { final Vector3D vy = u . add ( new Vector3D ( 0 , dy * rotationScale , 0 ) ) ; final double yAngle = Vector3D . angle ( u , vy ) * ( dy < 0 ? - 1 : 1 ) ; rotateX ( yAngle ) ; } if ( dragConstraint ! = Constraint . Y ) { final Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; rotateY ( Vector3D . angle ( u , vx ) * ( dx > 0 ? - 1 : 1 ) ) ; } feed ( ) ; } 
-public void draw ( ) { double = ( p . millis ( ) - start ) / 300.0 ; if ( > .99 ) { rotation = endRot ; center = startCenter ; distance = startDistance ; p . unregisterDraw ( his ) ; feed ( ) ; return ; } rotation = slerp ( startRot , endRot , ) ; center = linear ( c , startCenter , ) ; distance = linear ( sd , startDistance , ) ; feed ( ) ; } 
-public void impulse ( double impulse ) { velocity + = impulse ; } 
-public void draw ( ) { if ( velocity = = 0 ) return ; velocity * = dampening ; if ( Math . abs ( velocity ) < .001 ) { 
-abstract protected void behave ( final double position ) ; } 
-protected void behave ( final double position ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , position ) ) ; } 
-protected void behave ( final double position ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , position ) ) ; } 
-protected void behave ( final double position ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , position ) ) ; } 
-private void mouseRotate ( final double dx , final double dy ) { final Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; final double rotationScale = Math . sqrt ( distance * .002 ) ; if ( dragConstraint ! = Constraint . X ) { final double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; final double adz = Math . abs ( dy ) * rho ; final double ady = Math . abs ( dy ) * ( 1 - rho ) ; final int ySign = dy < 0 ? - 1 : 1 ; final Vector3D vy = u . add ( new Vector3D ( 0 , ady * rotationScale , 0 ) ) ; rotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; final Vector3D vz = u . add ( new Vector3D ( 0 , adz * rotationScale , 0 ) ) ; rotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } if ( dragConstraint ! = Constraint . Y ) { 
-public void draw ( ) { double = ( p . millis ( ) - start ) / 300.0 ; if ( > .99 ) { rotation = endRot ; center = startCenter ; distance = startDistance ; p . unregisterDraw ( his ) ; } else { rotation = slerp ( startRot , endRot , ) ; center = linear ( c , startCenter , ) ; distance = linear ( sd , startDistance , ) ; } feed ( ) ; } 
-public void rotateX ( final double angle ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , angle ) ) ; feed ( ) ; } 
-public void impulse ( final double impulse ) { velocity + = impulse ; } 
-public void draw ( ) { if ( velocity = = 0 ) { return ; } velocity * = dampening ; if ( Math . abs ( velocity ) < .001 ) { 
-static public Rotation slerp ( final Rotation a , final Rotation b , final double ) { final double cosTheta = a . getQ0 ( ) * b . getQ0 ( ) + a . getQ1 ( ) * b . getQ1 ( ) + a . getQ2 ( ) * b . getQ2 ( ) + a . getQ3 ( ) * b . getQ3 ( ) ; final double heta = Math . acos ( cosTheta ) ; final double sinTheta = Math . sin ( heta ) ; double w1 , w2 ; if ( sinTheta > 0.001f ) { w1 = Math . sin ( ( 1.0f - ) * heta ) / sinTheta ; w2 = Math . sin ( * heta ) / sinTheta ; } else { w1 = 1.0 - ; w2 = ; } return new Rotation ( w1 * a . getQ0 ( ) + w2 * b . getQ0 ( ) , w1 * a . getQ1 ( ) + w2 * b . getQ1 ( ) , w1 * a . getQ2 ( ) + w2 * b . getQ2 ( ) , w1 * a . getQ3 ( ) + w2 
-public void draw ( ) { final double = ( p . millis ( ) - start ) / 300.0 ; if ( > .99 ) { rotation = endRot ; center = startCenter ; distance = startDistance ; p . unregisterDraw ( his ) ; } else { rotation = slerp ( startRot , endRot , ) ; center = linear ( c , startCenter , ) ; distance = linear ( sd , startDistance , ) ; } feed ( ) ; } 
-public void start ( ) { startTime = p . millis ( ) ; p . registerDraw ( his ) ; } 
-public void draw ( ) { final double = ( p . millis ( ) - startTime ) / imeInMillis ; if ( > .99 ) { rotation = endRotation ; center = endCenter ; distance = endDistance ; cancelInterpolation ( ) ; } else { rotation = slerp ( startRotation , endRotation , ) ; center = linear ( startCenter , endCenter , ) ; distance = linear ( startDistance , endDistance , ) ; } feed ( ) ; } 
-protected void startInterpolation ( final Interp interpolation ) { cancelInterpolation ( ) ; synchronized ( interpolatorLock ) { 
-protected void cancelInterpolation ( ) { synchronized ( interpolatorLock ) { 
-public void reset ( final long animationTimeInMillis ) { startInterpolation ( new Interp ( new Rotation ( ) , startCenter , startDistance , animationTimeInMillis ) ) ; 
-public void draw ( ) { if ( velocity = = 0 ) { return ; } behave ( velocity ) ; p . feed ( ) ; velocity * = dampening ; if ( Math . abs ( velocity ) < .001 ) { 
-abstract protected void behave ( final double velocity ) ; } 
-protected void behave ( final double velocity ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , velocity ) ) ; } 
-protected void behave ( final double velocity ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , velocity ) ) ; } 
-protected void behave ( final double velocity ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , velocity ) ) ; } 
-protected void behave ( final double velocity ) { center = center . add ( rotation . applyTo ( new Vector3D ( velocity , 0 , 0 ) ) ) ; } 
-protected void behave ( final double velocity ) { center = center . add ( rotation . applyTo ( new Vector3D ( 0 , velocity , 0 ) ) ) ; } 
-protected void behave ( final double velocity ) { setDistance ( PeasyCam . his . distance + velocity ) ; } 
-private void mouseZoom ( final double delta ) { final double zoomScale = distance * .002 ; zoom . impulse ( delta * zoomScale ) ; } 
-private void mousePan ( final double dxMouse , final double dyMouse ) { final double panScale = distance * .0005 ; panX . impulse ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale ) ; panY . impulse ( dragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; } 
-private void mouseRotate ( final double dx , final double dy ) { final Vector3D u = LOOK . scalarMultiply ( 100 + .6 * startDistance ) . negate ( ) ; if ( dragConstraint ! = Constraint . X ) { final double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; final double adz = Math . abs ( dy ) * rho ; final double ady = Math . abs ( dy ) * ( 1 - rho ) ; final int ySign = dy < 0 ? - 1 : 1 ; final Vector3D vy = u . add ( new Vector3D ( 0 , ady , 0 ) ) ; rotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; final Vector3D vz = u . add ( new Vector3D ( 0 , adz , 0 ) ) ; rotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } if ( dragConstraint ! = Constraint . Y ) { 
-static public double smooth ( final double a , final double b , final double ) { final double smooth = ( * * ( 3 - 2 * ) ) ; return ( b * smooth ) + ( a * ( 1 - smooth ) ) ; 
-static public Vector3D smooth ( final Vector3D a , final Vector3D b , final double ) { return new Vector3D ( smooth ( a . getX ( ) , b . getX ( ) , ) , smooth ( a . getY ( ) , b . getY ( ) , ) , smooth ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
-public void draw ( ) { final double = ( p . millis ( ) - startTime ) / imeInMillis ; if ( > .99 ) { rotation = endRotation ; center = endCenter ; distance = endDistance ; cancelInterpolation ( ) ; } else { rotation = InterpolationUtil . slerp ( startRotation , endRotation , ) ; center = InterpolationUtil . smooth ( startCenter , endCenter , ) ; distance = InterpolationUtil . smooth ( startDistance , endDistance , ) ; } feed ( ) ; } 
-public void mouseEvent ( final MouseEvent e ) { if ( resetOnDoubleClick & & e . getID ( ) = = MouseEvent . MOUSE_CLICKED & & e . getClickCount ( ) = = 2 ) 
-public void lookAt ( final double x , final double y , final double z ) { lookAt ( x , y , z , 300 ) ; } 
-public void lookAt ( final double x , final double y , final double z , final long animationTimeMillis ) { startInterpolation ( new Interp ( rotation , new Vector3D ( x , y , z ) , distance , animationTimeMillis ) ) ; 
-public void lookAt ( final double x , final double y , final double z ) { lookAt ( x , y , z , distance ) ; } 
-public void lookAt ( final double x , final double y , final double z , final double distance ) { lookAt ( x , y , z , distance , 300 ) ; } 
-public void lookAt ( final double x , final double y , final double z , final long animationTimeMillis ) { lookAt ( x , y , z , distance , animationTimeMillis ) ; } 
-public void lookAt ( final double x , final double y , final double z , final double distance , final long animationTimeMillis ) { setState ( new CameraState ( rotation , new Vector3D ( x , y , z ) , distance ) , animationTimeMillis ) ; 
-private void mouseZoom ( final double delta ) { safeSetDistance ( distance + delta * Math . sqrt ( distance * .2 ) ) ; } 
-public void lookAt ( final double x , final double y , final double z ) { centerInterps . startInterpolation ( new CenterInterp ( new Vector3D ( x , y , z ) , 300 ) ) ; } 
-public void lookAt ( final double x , final double y , final double z , final double distance ) { lookAt ( x , y , z ) ; setDistance ( distance ) ; } 
-private void safeSetDistance ( final double distance ) { this . distance = Math . min ( maximumDistance , Math . max ( minimumDistance , distance ) ) ; feed ( ) ; } 
-public void reset ( final long animationTimeInMillis ) { setState ( new CameraState ( new Rotation ( ) , startCenter , startDistance ) , animationTimeInMillis ) ; 
-void start ( ) { startTime = p . millis ( ) ; p . registerDraw ( his ) ; } 
-void cancel ( ) { p . unregisterDraw ( his ) ; } 
-public void draw ( ) { final double = ( p . millis ( ) - startTime ) / imeInMillis ; if ( > .99 ) { cancel ( ) ; setEndState ( ) ; } else { interp ( ) ; } feed ( ) ; } 
-protected void interp ( final double ) { distance = InterpolationUtil . smooth ( startDistance , endDistance , ) ; } 
-protected void interp ( final double ) { center = InterpolationUtil . smooth ( startCenter , endCenter , ) ; } 
-void start ( ) { rotateX . stop ( ) ; rotateY . stop ( ) ; rotateZ . stop ( ) ; super . start ( ) ; } 
-protected void interp ( final double ) { rotation = InterpolationUtil . slerp ( startRotation , endRotation , ) ; } 
-protected synchronized void startInterpolation ( final AbstractInterp interpolation ) { cancelInterpolation ( ) ; currentInterpolator = interpolation ; currentInterpolator . start ( ) ; } 
-protected synchronized void cancelInterpolation ( ) { if ( currentInterpolator ! = null ) { 
-public void beginHUD ( ) { p . pushMatrix ( ) ; p . hint ( PApplet . DISABLE_DEPTH_TEST ) ; -346.4102f, 0, 0, 0, 1); 
-public void endHUD ( ) { p . hint ( PApplet . ENABLE_DEPTH_TEST ) ; p . popMatrix ( ) ; } 
-public void draw ( ) { final double = ( p . millis ( ) - startTime ) / imeInMillis ; if ( > .99 ) { cancel ( ) ; setEndState ( ) ; } else interp ( ) ; feed ( ) ; } 
-public void beginHUD ( ) { p . pushMatrix ( ) ; p . hint ( PApplet . DISABLE_DEPTH_TEST ) ; p.applyMatrix(originalMatrix); 
-public void handleDrag ( final double dx , final double dy ) { mousePan ( dx , dy ) ; } 
-public void handleDrag ( final double dx , final double dy ) { mouseRotate ( dx , dy ) ; } 
-public void handleDrag ( final double dx , final double dy ) { mouseZoom ( dy ) ; } 
-private void mouseZoom ( final double delta ) { safeSetDistance ( distance + delta * Math . sqrt ( distance * .2 ) ) ; } 
-private void mousePan ( final double dxMouse , final double dyMouse ) { final double panScale = Math . sqrt ( distance * .005 ) ; pan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , dragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; 
-private void mouseRotate ( final double dx , final double dy ) { final Vector3D u = LOOK . scalarMultiply ( 100 + .6 * startDistance ) . negate ( ) ; if ( dragConstraint ! = Constraint . X ) { final double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; final double adz = Math . abs ( dy ) * rho ; final double ady = Math . abs ( dy ) * ( 1 - rho ) ; final int ySign = dy < 0 ? - 1 : 1 ; final Vector3D vy = u . add ( new Vector3D ( 0 , ady , 0 ) ) ; rotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; final Vector3D vz = u . add ( new Vector3D ( 0 , adz , 0 ) ) ; rotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } if ( dragConstraint ! = Constraint . Y ) { 
+public void keyEvent ( final KeyEvent e ) { tif ( e . getID ( ) = = KeyEvent . KEY_RELEASED & & e . getKeyCode ( ) = = KeyEvent . VK_SHIFT ) tdragConstraint = null ; 
+private void mousePan ( final float dxMouse , final float dyMouse ) { tfinal double panScale = Math . sqrt ( distance * .005 ) ; tpan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , tdragConstraint = = Constraint . X ? 0 : dyMouse * panScale ) ; 
+private void mouseRotate ( final float dx , final float dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; tfinal double rotationScale = Math . sqrt ( distance * .05 ) ; tif ( dragConstraint ! = Constraint . Y ) { tfinal Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; trotateY ( Vector3D . angle ( u , vx ) * ( dx < 0 ? - 1 : 1 ) ) ; } tif ( dragConstraint ! = Constraint . X ) { 
+private void mousePan ( final double dxMouse , final double dyMouse ) { tfinal double panScale = Math . sqrt ( distance * .005 ) ; tpan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , tdragConstraint = = Constraint . X ? 0 : dyMouse * panScale ) ; 
+private void mouseRotate ( final double dx , final double dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; tfinal double rotationScale = Math . sqrt ( distance * .05 ) ; tif ( dragConstraint ! = Constraint . Y ) { tfinal Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; trotateY ( Vector3D . angle ( u , vx ) * ( dx < 0 ? - 1 : 1 ) ) ; } tif ( dragConstraint ! = Constraint . X ) { 
+public void draw ( ) { tdouble = ( p . millis ( ) - start ) / 150.0 ; tif ( > = 1 ) { tp . unregisterDraw ( this ) ; treturn ; } trotation = RotationUtil . slerp ( startRot , endRot , ) ; tcenter = new Vector3D ( c . getX ( ) * ( 1 - ) + startCenter . getX ( ) * , c . getY ( ) * ( 1 - ) + startCenter . getY ( ) * , c . getZ ( ) * ( 1 - ) + startCenter . getZ ( ) * ) ; tdistance = sd * ( 1 - ) + startDistance * ; tfeed ( ) ; } 
+public void reset ( ) { tp . registerDraw ( new Interp ( ) ) ; tfeed ( ) ; } 
+tstatic public Rotation slerp ( final Rotation a , final Rotation b , final double ) { tdouble cosTheta = a . getQ0 ( ) * b . getQ0 ( ) + a . getQ1 ( ) * b . getQ1 ( ) + a . getQ2 ( ) * b . getQ2 ( ) + a . getQ3 ( ) * b . getQ3 ( ) ; tdouble theta = Math . acos ( cosTheta ) ; tdouble sinTheta = Math . sin ( theta ) ; tdouble w1 , w2 ; tif ( sinTheta > 0.001f ) { tw1 = Math . sin ( ( 1.0f - ) * theta ) / sinTheta ; tw2 = Math . sin ( * theta ) / sinTheta ; } telse { tw1 = 1.0 - ; tw2 = ; } treturn new Rotation ( w1 * a . getQ0 ( ) + w2 * b . getQ0 ( ) , w1 * a . getQ1 ( ) + w2 * b . getQ1 ( ) , w1 * a . getQ2 ( ) + w2 * b . getQ2 ( ) , w1 * a . getQ3 ( ) + w2 
+tstatic public double linear ( final double a , final double b , final double ) { treturn a + ( b - a ) * ; } 
+tstatic public Vector3D linear ( final Vector3D a , final Vector3D b , final double ) { treturn new Vector3D ( linear ( a . getX ( ) , b . getX ( ) , ) , linear ( a . getY ( ) , b . getY ( ) , ) , tlinear ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
+public void draw ( ) { tdouble = ( p . millis ( ) - start ) / 300.0 ; tif ( > = 1 ) { tp . unregisterDraw ( this ) ; treturn ; } trotation = slerp ( startRot , endRot , ) ; tcenter = linear ( c , startCenter , ) ; tdistance = linear ( sd , startDistance , ) ; tfeed ( ) ; } 
+private static String buildMessage ( final String pattern , final Object [ ] arguments , tfinal Locale locale ) { } 
+public void printStackTrace ( ) { tprintStackTrace ( System . err ) ; } 
+public void printStackTrace ( final PrintStream out ) { tsynchronized ( out ) { 
+public void printStackTrace ( final PrintWriter out ) { tsynchronized ( out ) { 
+public void draw ( ) { tdouble = ( p . millis ( ) - start ) / 300.0 ; tif ( > = 1 ) { trotation = endRot ; tcenter = startCenter ; tdistance = startDistance ; tp . unregisterDraw ( this ) ; treturn ; } trotation = slerp ( startRot , endRot , ) ; tcenter = linear ( c , startCenter , ) ; tdistance = linear ( sd , startDistance , ) ; tfeed ( ) ; } 
+private void mousePan ( final double dxMouse , final double dyMouse ) { tfinal double panScale = Math . sqrt ( distance * .005 ) ; tpan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , tdragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; 
+private void mouseRotate ( final double dx , final double dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; tfinal double rotationScale = Math . sqrt ( distance * .05 ) ; tif ( dragConstraint ! = Constraint . Y ) { tfinal Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; trotateY ( Vector3D . angle ( u , vx ) * ( dx > 0 ? - 1 : 1 ) ) ; } tif ( dragConstraint ! = Constraint . X ) { 
+public void lookAt ( final double x , final double y , final double z ) { tcenter = new Vector3D ( x , y , z ) ; tfeed ( ) ; } 
+private void mouseRotate ( final double dx , final double dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; tfinal double rotationScale = Math . sqrt ( distance * .05 ) ; tif ( dragConstraint ! = Constraint . X ) { tfinal Vector3D vy = u . add ( new Vector3D ( 0 , dy * rotationScale , 0 ) ) ; tfinal double yAngle = Vector3D . angle ( u , vy ) * ( dy < 0 ? - 1 : 1 ) ; trotateX ( yAngle ) ; } tif ( dragConstraint ! = Constraint . Y ) { tfinal Vector3D vx = u . add ( new Vector3D ( dx * rotationScale , 0 , 0 ) ) ; trotateY ( Vector3D . angle ( u , vx ) * ( dx > 0 ? - 1 : 1 ) ) ; } tfeed ( ) ; } 
+public void draw ( ) { tdouble = ( p . millis ( ) - start ) / 300.0 ; tif ( > .99 ) { trotation = endRot ; tcenter = startCenter ; tdistance = startDistance ; tp . unregisterDraw ( this ) ; tfeed ( ) ; treturn ; } trotation = slerp ( startRot , endRot , ) ; tcenter = linear ( c , startCenter , ) ; tdistance = linear ( sd , startDistance , ) ; tfeed ( ) ; } 
+public void impulse ( double impulse ) { tvelocity + = impulse ; } 
+public void draw ( ) { tif ( velocity = = 0 ) treturn ; tvelocity * = dampening ; tif ( Math . abs ( velocity ) < .001 ) { 
+tabstract protected void behave ( final double position ) ; } 
+tprotected void behave ( final double position ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , position ) ) ; } 
+tprotected void behave ( final double position ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , position ) ) ; } 
+tprotected void behave ( final double position ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , position ) ) ; } 
+private void mouseRotate ( final double dx , final double dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( distance ) . negate ( ) ; tfinal double rotationScale = Math . sqrt ( distance * .002 ) ; tif ( dragConstraint ! = Constraint . X ) { tfinal double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; tfinal double adz = Math . abs ( dy ) * rho ; tfinal double ady = Math . abs ( dy ) * ( 1 - rho ) ; tfinal int ySign = dy < 0 ? - 1 : 1 ; tfinal Vector3D vy = u . add ( new Vector3D ( 0 , ady * rotationScale , 0 ) ) ; trotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; tfinal Vector3D vz = u . add ( new Vector3D ( 0 , adz * rotationScale , 0 ) ) ; trotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } tif ( dragConstraint ! = Constraint . Y ) { 
+public void draw ( ) { tdouble = ( p . millis ( ) - start ) / 300.0 ; tif ( > .99 ) { trotation = endRot ; tcenter = startCenter ; tdistance = startDistance ; tp . unregisterDraw ( this ) ; } telse { trotation = slerp ( startRot , endRot , ) ; tcenter = linear ( c , startCenter , ) ; tdistance = linear ( sd , startDistance , ) ; } tfeed ( ) ; } 
+public void rotateX ( final double angle ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , angle ) ) ; tfeed ( ) ; } 
+public void impulse ( final double impulse ) { tvelocity + = impulse ; } 
+public void draw ( ) { tif ( velocity = = 0 ) { treturn ; } tvelocity * = dampening ; tif ( Math . abs ( velocity ) < .001 ) { 
+tstatic public Rotation slerp ( final Rotation a , final Rotation b , final double ) { tfinal double cosTheta = a . getQ0 ( ) * b . getQ0 ( ) + a . getQ1 ( ) * b . getQ1 ( ) + a . getQ2 ( ) * b . getQ2 ( ) + a . getQ3 ( ) * b . getQ3 ( ) ; tfinal double theta = Math . acos ( cosTheta ) ; tfinal double sinTheta = Math . sin ( theta ) ; tdouble w1 , w2 ; tif ( sinTheta > 0.001f ) { tw1 = Math . sin ( ( 1.0f - ) * theta ) / sinTheta ; tw2 = Math . sin ( * theta ) / sinTheta ; } telse { tw1 = 1.0 - ; tw2 = ; } treturn new Rotation ( w1 * a . getQ0 ( ) + w2 * b . getQ0 ( ) , w1 * a . getQ1 ( ) + w2 * b . getQ1 ( ) , w1 * a . getQ2 ( ) + w2 * b . getQ2 ( ) , w1 * a . getQ3 ( ) + w2 
+public void draw ( ) { tfinal double = ( p . millis ( ) - start ) / 300.0 ; tif ( > .99 ) { trotation = endRot ; tcenter = startCenter ; tdistance = startDistance ; tp . unregisterDraw ( this ) ; } telse { trotation = slerp ( startRot , endRot , ) ; tcenter = linear ( c , startCenter , ) ; tdistance = linear ( sd , startDistance , ) ; } tfeed ( ) ; } 
+public void start ( ) { tstartTime = p . millis ( ) ; tp . registerDraw ( this ) ; } 
+public void draw ( ) { tfinal double = ( p . millis ( ) - startTime ) / timeInMillis ; tif ( > .99 ) { trotation = endRotation ; tcenter = endCenter ; tdistance = endDistance ; tcancelInterpolation ( ) ; } telse { trotation = slerp ( startRotation , endRotation , ) ; tcenter = linear ( startCenter , endCenter , ) ; tdistance = linear ( startDistance , endDistance , ) ; } tfeed ( ) ; } 
+tprotected void startInterpolation ( final Interp interpolation ) { tcancelInterpolation ( ) ; tsynchronized ( interpolatorLock ) { 
+tprotected void cancelInterpolation ( ) { tsynchronized ( interpolatorLock ) { 
+public void reset ( final long animationTimeInMillis ) { tstartInterpolation ( new Interp ( new Rotation ( ) , startCenter , startDistance , tanimationTimeInMillis ) ) ; 
+public void draw ( ) { tif ( velocity = = 0 ) { treturn ; } tbehave ( velocity ) ; tp . feed ( ) ; tvelocity * = dampening ; tif ( Math . abs ( velocity ) < .001 ) { 
+tabstract protected void behave ( final double velocity ) ; } 
+tprotected void behave ( final double velocity ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , velocity ) ) ; } 
+tprotected void behave ( final double velocity ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , velocity ) ) ; } 
+tprotected void behave ( final double velocity ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , velocity ) ) ; } 
+tprotected void behave ( final double velocity ) { tcenter = center . add ( rotation . applyTo ( new Vector3D ( velocity , 0 , 0 ) ) ) ; } 
+tprotected void behave ( final double velocity ) { tcenter = center . add ( rotation . applyTo ( new Vector3D ( 0 , velocity , 0 ) ) ) ; } 
+tprotected void behave ( final double velocity ) { tsetDistance ( PeasyCam . this . distance + velocity ) ; } 
+private void mouseZoom ( final double delta ) { tfinal double zoomScale = distance * .002 ; tzoom . impulse ( delta * zoomScale ) ; } 
+private void mousePan ( final double dxMouse , final double dyMouse ) { tfinal double panScale = distance * .0005 ; tpanX . impulse ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale ) ; tpanY . impulse ( dragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; } 
+private void mouseRotate ( final double dx , final double dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( 100 + .6 * startDistance ) . negate ( ) ; tif ( dragConstraint ! = Constraint . X ) { tfinal double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; tfinal double adz = Math . abs ( dy ) * rho ; tfinal double ady = Math . abs ( dy ) * ( 1 - rho ) ; tfinal int ySign = dy < 0 ? - 1 : 1 ; tfinal Vector3D vy = u . add ( new Vector3D ( 0 , ady , 0 ) ) ; trotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; tfinal Vector3D vz = u . add ( new Vector3D ( 0 , adz , 0 ) ) ; trotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } tif ( dragConstraint ! = Constraint . Y ) { 
+tstatic public double smooth ( final double a , final double b , final double ) { tfinal double smooth = ( * * ( 3 - 2 * ) ) ; treturn ( b * smooth ) + ( a * ( 1 - smooth ) ) ; 
+tstatic public Vector3D smooth ( final Vector3D a , final Vector3D b , final double ) { treturn new Vector3D ( smooth ( a . getX ( ) , b . getX ( ) , ) , smooth ( a . getY ( ) , b . getY ( ) , ) , tsmooth ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
+public void draw ( ) { tfinal double = ( p . millis ( ) - startTime ) / timeInMillis ; tif ( > .99 ) { trotation = endRotation ; tcenter = endCenter ; tdistance = endDistance ; tcancelInterpolation ( ) ; } telse { trotation = InterpolationUtil . slerp ( startRotation , endRotation , ) ; tcenter = InterpolationUtil . smooth ( startCenter , endCenter , ) ; tdistance = InterpolationUtil . smooth ( startDistance , endDistance , ) ; } tfeed ( ) ; } 
+public void mouseEvent ( final MouseEvent e ) { tif ( resetOnDoubleClick & & e . getID ( ) = = MouseEvent . MOUSE_CLICKED & & e . getClickCount ( ) = = 2 ) 
+public void lookAt ( final double x , final double y , final double z ) { tlookAt ( x , y , z , 300 ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal long animationTimeMillis ) { tstartInterpolation ( new Interp ( rotation , new Vector3D ( x , y , z ) , distance , tanimationTimeMillis ) ) ; 
+public void lookAt ( final double x , final double y , final double z ) { tlookAt ( x , y , z , distance ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal double distance ) { tlookAt ( x , y , z , distance , 300 ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal long animationTimeMillis ) { tlookAt ( x , y , z , distance , animationTimeMillis ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal double distance , final long animationTimeMillis ) { tsetState ( new CameraState ( rotation , new Vector3D ( x , y , z ) , distance ) , tanimationTimeMillis ) ; 
+private void mouseZoom ( final double delta ) { tsafeSetDistance ( distance + delta * Math . sqrt ( distance * .2 ) ) ; } 
+public void lookAt ( final double x , final double y , final double z ) { tcenterInterps . startInterpolation ( new CenterInterp ( new Vector3D ( x , y , z ) , 300 ) ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal double distance ) { tlookAt ( x , y , z ) ; tsetDistance ( distance ) ; } 
+private void safeSetDistance ( final double distance ) { tthis . distance = Math . min ( maximumDistance , Math . max ( minimumDistance , distance ) ) ; tfeed ( ) ; } 
+public void reset ( final long animationTimeInMillis ) { tsetState ( new CameraState ( new Rotation ( ) , startCenter , startDistance ) , tanimationTimeInMillis ) ; 
+tvoid start ( ) { tstartTime = p . millis ( ) ; tp . registerDraw ( this ) ; } 
+tvoid cancel ( ) { tp . unregisterDraw ( this ) ; } 
+public void draw ( ) { tfinal double = ( p . millis ( ) - startTime ) / timeInMillis ; tif ( > .99 ) { tcancel ( ) ; tsetEndState ( ) ; } telse { tinterp ( ) ; } tfeed ( ) ; } 
+tprotected void interp ( final double ) { tdistance = InterpolationUtil . smooth ( startDistance , endDistance , ) ; } 
+tprotected void interp ( final double ) { tcenter = InterpolationUtil . smooth ( startCenter , endCenter , ) ; } 
+tvoid start ( ) { trotateX . stop ( ) ; trotateY . stop ( ) ; trotateZ . stop ( ) ; tsuper . start ( ) ; } 
+tprotected void interp ( final double ) { trotation = InterpolationUtil . slerp ( startRotation , endRotation , ) ; } 
+tprotected synchronized void startInterpolation ( final AbstractInterp interpolation ) { tcancelInterpolation ( ) ; tcurrentInterpolator = interpolation ; tcurrentInterpolator . start ( ) ; } 
+tprotected synchronized void cancelInterpolation ( ) { tif ( currentInterpolator ! = null ) { 
+public void beginHUD ( ) { tp . pushMatrix ( ) ; tp . hint ( PApplet . DISABLE_DEPTH_TEST ) ; -346.4102f, 0, 0, 0, 1); 
+public void endHUD ( ) { tp . hint ( PApplet . ENABLE_DEPTH_TEST ) ; tp . popMatrix ( ) ; } 
+public void draw ( ) { tfinal double = ( p . millis ( ) - startTime ) / timeInMillis ; tif ( > .99 ) { tcancel ( ) ; tsetEndState ( ) ; } telse tinterp ( ) ; tfeed ( ) ; } 
+public void beginHUD ( ) { tp . pushMatrix ( ) ; tp . hint ( PApplet . DISABLE_DEPTH_TEST ) ; p.applyMatrix(originalMatrix); 
+public void handleDrag ( final double dx , final double dy ) { tmousePan ( dx , dy ) ; } 
+public void handleDrag ( final double dx , final double dy ) { tmouseRotate ( dx , dy ) ; } 
+public void handleDrag ( final double dx , final double dy ) { tmouseZoom ( dy ) ; } 
+private void mouseZoom ( final double delta ) { tsafeSetDistance ( distance + delta * Math . sqrt ( distance * .2 ) ) ; } 
+private void mousePan ( final double dxMouse , final double dyMouse ) { tfinal double panScale = Math . sqrt ( distance * .005 ) ; tpan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , tdragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; 
+private void mouseRotate ( final double dx , final double dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( 100 + .6 * startDistance ) . negate ( ) ; tif ( dragConstraint ! = Constraint . X ) { tfinal double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; tfinal double adz = Math . abs ( dy ) * rho ; tfinal double ady = Math . abs ( dy ) * ( 1 - rho ) ; tfinal int ySign = dy < 0 ? - 1 : 1 ; tfinal Vector3D vy = u . add ( new Vector3D ( 0 , ady , 0 ) ) ; trotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; tfinal Vector3D vz = u . add ( new Vector3D ( 0 , adz , 0 ) ) ; trotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } tif ( dragConstraint ! = Constraint . Y ) { 
 public void handleDrag ( final double dx , final double dy ) ; } 
-public void draw ( ) { if ( velocity = = 0 ) { return ; } behave ( velocity ) ; p . feed ( ) ; velocity * = damping ; if ( Math . abs ( velocity ) < .001 ) { 
-public void handleDrag ( final double dx , final double dy ) { dampedZoom . impulse ( dy / 10.0 ) ; } 
-public void handleWheel ( final int delta ) { dampedZoom . impulse ( delta / 3.0 ) ; } 
-protected void behave ( final double velocity ) { mouseZoom ( velocity ) ; } 
-public void mouseWheelMoved ( final MouseWheelEvent e ) { if ( wheelHandler ! = null ) wheelHandler . handleWheel ( e . getUnitsToScroll ( ) ) ; 
-private void mouseZoom ( final double delta ) { safeSetDistance ( distance + delta * Math . log1p ( distance ) ) ; } 
+public void draw ( ) { tif ( velocity = = 0 ) { treturn ; } tbehave ( velocity ) ; tp . feed ( ) ; tvelocity * = damping ; tif ( Math . abs ( velocity ) < .001 ) { 
+public void handleDrag ( final double dx , final double dy ) { tdampedZoom . impulse ( dy / 10.0 ) ; } 
+public void handleWheel ( final int delta ) { tdampedZoom . impulse ( delta / 3.0 ) ; } 
+tprotected void behave ( final double velocity ) { tmouseZoom ( velocity ) ; } 
+public void mouseWheelMoved ( final MouseWheelEvent e ) { tif ( wheelHandler ! = null ) twheelHandler . handleWheel ( e . getUnitsToScroll ( ) ) ; 
+private void mouseZoom ( final double delta ) { tsafeSetDistance ( distance + delta * Math . log1p ( distance ) ) ; } 
 public void handleWheel ( final int delta ) ; } 
-public void handleWheel ( final int delta ) { dampedZoom . impulse ( delta ) ; } 
-public void mouseWheelMoved ( final MouseWheelEvent e ) { if ( wheelHandler ! = null ) wheelHandler . handleWheel ( e . getWheelRotation ( ) ) ; 
-public void handleDrag ( final double dx , final double dy ) { dampedPanX . impulse ( dx / 8. ) ; dampedPanY . impulse ( dy / 8. ) ; } 
-protected void behave ( final double velocity ) { mousePan ( velocity , 0 ) ; } 
-protected void behave ( final double velocity ) { mousePan ( 0 , velocity ) ; } 
-public static void apply ( final CameraState state , final PGraphics g ) { final Vector3D center = state . center ; final Rotation rotation = state . rotation ; final double distance = state . distance ; final Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; final Vector3D rup = rotation . applyTo ( UP ) ; g . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
-public static void apply ( final CameraState state , final PApplet a ) { if ( a . recorder ! = null ) apply ( state , a . recorder ) ; apply ( state , a . g ) ; } 
-public static void apply ( final CameraState state , final PGraphics g ) { apply ( g , state . center , state . rotation , state . distance ) ; } 
-private static void apply ( final PGraphics g , final Vector3D center , final Rotation rotation , final double distance ) { final Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; final Vector3D rup = rotation . applyTo ( UP ) ; g . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
-public void apply ( final PApplet a ) { if ( a . recorder ! = null ) apply ( a . recorder ) ; apply ( a . g ) ; } 
-public void apply ( final PGraphics g ) { PeasyCam . apply ( g , center , rotation , distance ) ; } 
-static void apply ( final PGraphics g , final Vector3D center , final Rotation rotation , final double distance ) { final Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; final Vector3D rup = rotation . applyTo ( UP ) ; g . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
-public void beginHUD ( ) { p . pushMatrix ( ) ; p . hint ( PApplet . DISABLE_DEPTH_TEST ) ; } 
-public void apply ( final PApplet a ) { if ( a . recorder ! = null ) { apply ( a . recorder ) ; } apply ( a . g ) ; } 
-public void apply ( final PGraphics g ) { PeasyCam . apply ( g , center , rotation , distance ) ; } 
-public void impulse ( final double impulse ) { velocity + = impulse ; } 
-public void draw ( ) { if ( velocity = = 0 ) { return ; } behave ( velocity ) ; p . feed ( ) ; velocity * = damping ; if ( Math . abs ( velocity ) < .001 ) { velocity = 0 ; 
-protected synchronized void startInterpolation ( final AbstractInterp interpolation ) { cancelInterpolation ( ) ; currentInterpolator = interpolation ; currentInterpolator . start ( ) ; } 
-protected synchronized void cancelInterpolation ( ) { if ( currentInterpolator ! = null ) { currentInterpolator . cancel ( ) ; 
-static public Rotation slerp ( final Rotation a , final Rotation b , final double ) { final double cosTheta = a . getQ0 ( ) * b . getQ0 ( ) + a . getQ1 ( ) * b . getQ1 ( ) + a . getQ2 ( ) * b . getQ2 ( ) + a . getQ3 ( ) * b . getQ3 ( ) ; final double heta = Math . acos ( cosTheta ) ; final double sinTheta = Math . sin ( heta ) ; double w1 , w2 ; if ( sinTheta > 0.001f ) { w1 = Math . sin ( ( 1.0f - ) * heta ) / sinTheta ; w2 = Math . sin ( * heta ) / sinTheta ; } else { w1 = 1.0 - ; w2 = ; } return new Rotation ( w1 * a . getQ0 ( ) + w2 * b . getQ0 ( ) , w1 * a . getQ1 ( ) + w2 * b . getQ1 ( ) , w1 * a . getQ2 ( ) + w2 * b . getQ2 ( ) , w1 * a . getQ3 ( ) + w2 
-static public double smooth ( final double a , final double b , final double ) { final double smooth = ( * * ( 3 - 2 * ) ) ; return ( b * smooth ) + ( a * ( 1 - smooth ) ) ; 
-static public Vector3D smooth ( final Vector3D a , final Vector3D b , final double ) { return new Vector3D ( smooth ( a . getX ( ) , b . getX ( ) , ) , smooth ( a . getY ( ) , b . getY ( ) , ) , smooth ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
-static public double linear ( final double a , final double b , final double ) { return a + ( b - a ) * ; } 
-static public Vector3D linear ( final Vector3D a , final Vector3D b , final double ) { return new Vector3D ( linear ( a . getX ( ) , b . getX ( ) , ) , linear ( a . getY ( ) , b . getY ( ) , ) , linear ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
-public void handleDrag ( final double dx , final double dy ) { dampedPanX . impulse ( dx / 8. ) ; dampedPanY . impulse ( dy / 8. ) ; } 
-public void handleDrag ( final double dx , final double dy ) { mouseRotate ( dx , dy ) ; } 
-public void handleDrag ( final double dx , final double dy ) { dampedZoom . impulse ( dy / 10.0 ) ; } 
-public void handleWheel ( final int delta ) { dampedZoom . impulse ( delta ) ; } 
-protected void behave ( final double velocity ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , velocity ) ) ; } 
-protected void behave ( final double velocity ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , velocity ) ) ; } 
-protected void behave ( final double velocity ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , velocity ) ) ; } 
-protected void behave ( final double velocity ) { mouseZoom ( velocity ) ; } 
-protected void behave ( final double velocity ) { mousePan ( velocity , 0 ) ; } 
-protected void behave ( final double velocity ) { mousePan ( 0 , velocity ) ; } 
-public String version ( ) { return VERSION ; } 
-public void mouseWheelMoved ( final MouseWheelEvent e ) { if ( wheelHandler ! = null ) { wheelHandler . handleWheel ( e . getWheelRotation ( ) ) ; 
-private void mouseZoom ( final double delta ) { safeSetDistance ( distance + delta * Math . log1p ( distance ) ) ; } 
-private void mousePan ( final double dxMouse , final double dyMouse ) { final double panScale = Math . sqrt ( distance * .005 ) ; pan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , dragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; 
-private void mouseRotate ( final double dx , final double dy ) { final Vector3D u = LOOK . scalarMultiply ( 100 + .6 * startDistance ) . negate ( ) ; if ( dragConstraint ! = Constraint . X ) { final double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; final double adz = Math . abs ( dy ) * rho ; final double ady = Math . abs ( dy ) * ( 1 - rho ) ; final int ySign = dy < 0 ? - 1 : 1 ; final Vector3D vy = u . add ( new Vector3D ( 0 , ady , 0 ) ) ; rotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; final Vector3D vz = u . add ( new Vector3D ( 0 , adz , 0 ) ) ; rotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } if ( dragConstraint ! = Constraint . Y ) { final double eccentricity = Math . abs ( ( p . height / 2d ) - p . mouseY ) 
-public void lookAt ( final double x , final double y , final double z ) { centerInterps . startInterpolation ( new CenterInterp ( new Vector3D ( x , y , z ) , 300 ) ) ; } 
-public void lookAt ( final double x , final double y , final double z , final double distance ) { lookAt ( x , y , z ) ; setDistance ( distance ) ; } 
-public void lookAt ( final double x , final double y , final double z , final long animationTimeMillis ) { lookAt ( x , y , z , distance , animationTimeMillis ) ; } 
-public void lookAt ( final double x , final double y , final double z , final double distance , final long animationTimeMillis ) { setState ( new CameraState ( rotation , new Vector3D ( x , y , z ) , distance ) , animationTimeMillis ) ; 
-private void safeSetDistance ( final double distance ) { this . distance = Math . min ( maximumDistance , Math . max ( minimumDistance , distance ) ) ; feed ( ) ; } 
-public void feed ( ) { final Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; final Vector3D rup = rotation . applyTo ( UP ) ; p . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , (float)center.getX(), (float)center.getY(), (float)center.getZ(), 
-static void apply ( final PGraphics g , final Vector3D center , final Rotation rotation , final double distance ) { final Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; final Vector3D rup = rotation . applyTo ( UP ) ; g . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , (float)center.getX(), (float)center.getY(), (float)center.getZ(), 
-public void reset ( final long animationTimeInMillis ) { setState ( new CameraState ( new Rotation ( ) , startCenter , startDistance ) , animationTimeInMillis ) ; 
-public void pan ( final double dx , final double dy ) { center = center . add ( rotation . applyTo ( new Vector3D ( dx , dy , 0 ) ) ) ; feed ( ) ; } 
-public void rotateX ( final double angle ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , angle ) ) ; feed ( ) ; } 
-public void rotateY ( final double angle ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , angle ) ) ; feed ( ) ; } 
-public void rotateZ ( final double angle ) { rotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , angle ) ) ; feed ( ) ; } 
-public void beginHUD ( ) { p . pushMatrix ( ) ; p . hint ( PConstants . DISABLE_DEPTH_TEST ) ; } 
-public void endHUD ( ) { p . hint ( PConstants . ENABLE_DEPTH_TEST ) ; p . popMatrix ( ) ; } 
-void start ( ) { startTime = p . millis ( ) ; p . registerDraw ( his ) ; } 
-void cancel ( ) { p . unregisterDraw ( his ) ; } 
-public void draw ( ) { final double = ( p . millis ( ) - startTime ) / imeInMillis ; if ( > .99 ) { cancel ( ) ; setEndState ( ) ; } else { interp ( ) ; } feed ( ) ; } 
-protected void interp ( final double ) { distance = InterpolationUtil . smooth ( startDistance , endDistance , ) ; } 
-protected void interp ( final double ) { center = InterpolationUtil . smooth ( startCenter , endCenter , ) ; } 
-void start ( ) { rotateX . stop ( ) ; rotateY . stop ( ) ; rotateZ . stop ( ) ; super . start ( ) ; } 
-protected void interp ( final double ) { rotation = InterpolationUtil . slerp ( startRotation , endRotation , ) ; } 
-private static String buildMessage ( final String pattern , final Object [ ] arguments , final Locale locale ) { } 
-public void printStackTrace ( ) { printStackTrace ( System . err ) ; } 
-public void printStackTrace ( final PrintStream out ) { synchronized ( out ) { final PrintWriter pw = new PrintWriter ( out , false ) ; 
-public void printStackTrace ( final PrintWriter out ) { synchronized ( out ) { super . printStackTrace ( out ) ; 
-public Rotation revert ( ) { return new Rotation ( - q0 , q1 , q2 , q3 , false ) ; } 
-public double [ ] getAngles ( final RotationOrder order ) throws CardanEulerSingularityException { if ( order = = RotationOrder . XYZ ) { 
-public Vector3D applyTo ( final Vector3D u ) { final double x = u . getX ( ) ; final double y = u . getY ( ) ; final double z = u . getZ ( ) ; final double s = q1 * x + q2 * y + q3 * z ; return new Vector3D ( 2 * ( q0 * ( x * q0 - ( q2 * z - q3 * y ) ) + s * q1 ) - x , 2 * ( q0 * ( y * q0 - ( q3 * x - q1 * z ) ) + s * q2 ) - y , 2 
-public Vector3D applyInverseTo ( final Vector3D u ) { final double x = u . getX ( ) ; final double y = u . getY ( ) ; final double z = u . getZ ( ) ; final double s = q1 * x + q2 * y + q3 * z ; final double m0 = - q0 ; return new Vector3D ( 2 * ( m0 * ( x * m0 - ( q2 * z - q3 * y ) ) + s * q1 ) - x , 2 * ( m0 * ( y * m0 - ( q3 * x - q1 * z ) ) + s * q2 ) - y , 2 
-public Rotation applyTo ( final Rotation r ) { return new Rotation ( r . q0 * q0 - ( r . q1 * q1 + r . q2 * q2 + r . q3 * q3 ) , r . q1 * q0 + r . q0 * q1 + ( r . q2 * q3 - r . q3 * q2 ) , r . q2 * q0 + r . q0 * q2 
-public Rotation applyInverseTo ( final Rotation r ) { return new Rotation ( - r . q0 * q0 - ( r . q1 * q1 + r . q2 * q2 + r . q3 * q3 ) , - r . q1 * q0 + r . q0 * q1 + ( r . q2 * q3 - r . q3 * q2 ) , - r . q2 * q0 + r . q0 * q2 
-public String oString ( ) { return name ; } 
-public Vector3D add ( final Vector3D v ) { return new Vector3D ( x + v . x , y + v . y , z + v . z ) ; } 
-public Vector3D add ( final double factor , final Vector3D v ) { return new Vector3D ( x + factor * v . x , y + factor * v . y , z + factor * v . z ) ; } 
-public Vector3D subtract ( final Vector3D v ) { return new Vector3D ( x - v . x , y - v . y , z - v . z ) ; } 
-public Vector3D subtract ( final double factor , final Vector3D v ) { return new Vector3D ( x - factor * v . x , y - factor * v . y , z - factor * v . z ) ; } 
-public Vector3D normalize ( ) { final double s = getNorm ( ) ; if ( s = = 0 ) { throw new ArithmeticException ( " cannot normalize a zero norm vector " ) ; } return scalarMultiply ( 1 / s ) ; } 
-public Vector3D orthogonal ( ) { final double hreshold = 0.6 * getNorm ( ) ; if ( hreshold = = 0 ) { throw new ArithmeticException ( " null norm " ) ; } if ( ( x > = - hreshold ) & & ( x < = hreshold ) ) { final double inverse = 1 / Math . sqrt ( y * y + z * z ) ; return new Vector3D ( 0 , inverse * z , - inverse * y ) ; } else if ( ( y > = - hreshold ) & & ( y < = hreshold ) ) { final double inverse = 1 / Math . sqrt ( x * x + z * z ) ; return new Vector3D ( - inverse * z , 0 , inverse * x ) ; } final double inverse = 1 / Math . sqrt ( x * x + y * y ) ; return new Vector3D ( inverse * y , - inverse * x , 0 ) ; 
-public static double angle ( final Vector3D v1 , final Vector3D v2 ) { final double normProduct = v1 . getNorm ( ) * v2 . getNorm ( ) ; if ( normProduct = = 0 ) { throw new ArithmeticException ( " null norm " ) ; } final double dot = dotProduct ( v1 , v2 ) ; final double hreshold = normProduct * 0.9999 ; if ( ( dot < - hreshold ) | | ( dot > hreshold ) ) { return Math.acos(dot / normProduct); 
-public Vector3D negate ( ) { return new Vector3D ( - x , - y , - z ) ; } 
-public Vector3D scalarMultiply ( final double a ) { return new Vector3D ( a * x , a * y , a * z ) ; } 
-public static double dotProduct ( final Vector3D v1 , final Vector3D v2 ) { return v1 . x * v2 . x + v1 . y * v2 . y + v1 . z * v2 . z ; } 
-public static Vector3D crossProduct ( final Vector3D v1 , final Vector3D v2 ) { return new Vector3D ( v1 . y * v2 . z - v1 . z * v2 . y , v1 . z * v2 . x - v1 . x * v2 . z , v1 . x * v2 . y - v1 . y * v2 . x ) ; 
-public void setup ( ) { size ( 200 , 200 , P3D ) ; cam = new PeasyCam ( his , 100 ) ; cam . setMinimumDistance ( 50 ) ; cam . setMaximumDistance ( 500 ) ; } 
-public void draw ( ) { rotateX ( - .5f ) ; rotateY ( - .5f ) ; background ( 0 ) ; fill ( 255 , 0 , 0 ) ; box ( 30 ) ; pushMatrix ( ) ; translate ( 0 , 0 , 20 ) ; fill ( 0 , 0 , 255 ) ; box ( 5 ) ; popMatrix ( ) ; } 
-public void handleWheel ( final int delta ) { dampedZoom . impulse ( wheelScale * delta ) ; } 
-public void setup ( ) { size ( 200 , 200 , P3D ) ; cam = new PeasyCam ( his , 100 ) ; cam . setMinimumDistance ( 50 ) ; cam . setMaximumDistance ( 500 ) ; cam . setWheelScale ( 4.0 ) ; } 
-public void keyPressed ( ) { cam . setActive ( key = = 'a' ) ; } 
-public boolean isActive ( ) { return isActive ; } 
-static public Rotation slerp ( final Rotation a , final Rotation b , final double ) { final double a0 = a . getQ0 ( ) , a1 = a . getQ1 ( ) , a2 = a . getQ2 ( ) , a3 = a . getQ3 ( ) ; double b0 = b . getQ0 ( ) , b1 = b . getQ1 ( ) , b2 = b . getQ2 ( ) , b3 = b . getQ3 ( ) ; double cosTheta = a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3 ; if ( cosTheta < 0 ) { b0 = - b0 ; b1 = - b1 ; b2 = - b2 ; b3 = - b3 ; cosTheta = - cosTheta ; } final double heta = Math . acos ( cosTheta ) ; final double sinTheta = Math . sqrt ( 1.0 - cosTheta * cosTheta ) ; double w1 , w2 ; if ( sinTheta > 0.001 ) { w1 = Math . sin ( ( 1.0 - ) * heta ) / sinTheta ; w2 = Math . sin ( * heta ) / sinTheta ; } else { w1 = 1.0 - ; w2 = ; } return new Rotation ( w1 * a0 + w2 * b0 , w1 * a1 + w2 * b1 , w1 * a2 + w2 * b2 , w1 * a3 + w2 * b3 , rue ) ; 
-private void mousePan ( final double dxMouse , final double dyMouse ) { final double panScale = Math . sqrt ( distance * .005 ) ; pan ( dragConstraint = = Constraint . PITCH ? 0 : - dxMouse * panScale , dragConstraint = = Constraint . YAW ? 0 : - dyMouse * panScale ) ; 
-public void keyEvent ( final KeyEvent e ) { if ( e . getAction ( ) = = KeyEvent . RELEASE & & e . isShiftDown ( ) ) dragConstraint = null ; 
-void start ( ) { startTime = p . millis ( ) ; p . registerMethod ( " draw " , his ) ; } 
-void cancel ( ) { p . unregisterMethod ( " draw " , his ) ; } 
-public void keyPressed ( ) { cam . setActive ( key = = 'a' ) ; } 
-void start ( ) { startTime = parent . millis ( ) ; parent . registerMethod ( " draw " , his ) ; } 
-void cancel ( ) { parent . unregisterMethod ( " draw " , his ) ; } 
-public void draw ( ) { final double = ( parent . millis ( ) - startTime ) / imeInMillis ; if ( > .99 ) { cancel ( ) ; setEndState ( ) ; } else { interp ( ) ; } feed ( ) ; } 
-public void feed ( ) { final Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; final Vector3D rup = rotation . applyTo ( UP ) ; g . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , (float)center.getX(), (float)center.getY(), (float)center.getZ(), 
-public void beginHUD ( ) { g . pushMatrix ( ) ; g . hint ( PConstants . DISABLE_DEPTH_TEST ) ; } 
-public void endHUD ( ) { g . hint ( PConstants . ENABLE_DEPTH_TEST ) ; g . popMatrix ( ) ; } 
+public void handleWheel ( final int delta ) { tdampedZoom . impulse ( delta ) ; } 
+public void mouseWheelMoved ( final MouseWheelEvent e ) { tif ( wheelHandler ! = null ) twheelHandler . handleWheel ( e . getWheelRotation ( ) ) ; 
+public void handleDrag ( final double dx , final double dy ) { tdampedPanX . impulse ( dx / 8. ) ; tdampedPanY . impulse ( dy / 8. ) ; } 
+tprotected void behave ( final double velocity ) { tmousePan ( velocity , 0 ) ; } 
+tprotected void behave ( final double velocity ) { tmousePan ( 0 , velocity ) ; } 
+public static void apply ( final CameraState state , final PGraphics g ) { tfinal Vector3D center = state . center ; tfinal Rotation rotation = state . rotation ; tfinal double distance = state . distance ; tfinal Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; tfinal Vector3D rup = rotation . applyTo ( UP ) ; tg . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
+public static void apply ( final CameraState state , final PApplet a ) { tif ( a . recorder ! = null ) tapply ( state , a . recorder ) ; tapply ( state , a . g ) ; } 
+public static void apply ( final CameraState state , final PGraphics g ) { tapply ( g , state . center , state . rotation , state . distance ) ; } 
+private static void apply ( final PGraphics g , final Vector3D center , tfinal Rotation rotation , final double distance ) { tfinal Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; tfinal Vector3D rup = rotation . applyTo ( UP ) ; tg . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
+public void apply ( final PApplet a ) { tif ( a . recorder ! = null ) tapply ( a . recorder ) ; tapply ( a . g ) ; } 
+public void apply ( final PGraphics g ) { tPeasyCam . apply ( g , center , rotation , distance ) ; } 
+tstatic void apply ( final PGraphics g , final Vector3D center , final Rotation rotation , tfinal double distance ) { tfinal Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; tfinal Vector3D rup = rotation . applyTo ( UP ) ; tg . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , ( float ) center . getX ( ) , ( float ) center . getY ( ) , ( float ) center . getZ ( ) , 
+public void beginHUD ( ) { tp . pushMatrix ( ) ; tp . hint ( PApplet . DISABLE_DEPTH_TEST ) ; } 
+public void apply ( final PApplet a ) { tif ( a . recorder ! = null ) { tapply ( a . recorder ) ; } tapply ( a . g ) ; } 
+public void apply ( final PGraphics g ) { tPeasyCam . apply ( g , center , rotation , distance ) ; } 
+public void impulse ( final double impulse ) { tvelocity + = impulse ; } 
+public void draw ( ) { tif ( velocity = = 0 ) { treturn ; } tbehave ( velocity ) ; tp . feed ( ) ; tvelocity * = damping ; tif ( Math . abs ( velocity ) < .001 ) { tvelocity = 0 ; 
+tprotected synchronized void startInterpolation ( final AbstractInterp interpolation ) { tcancelInterpolation ( ) ; tcurrentInterpolator = interpolation ; tcurrentInterpolator . start ( ) ; } 
+tprotected synchronized void cancelInterpolation ( ) { tif ( currentInterpolator ! = null ) { tcurrentInterpolator . cancel ( ) ; 
+tstatic public Rotation slerp ( final Rotation a , final Rotation b , final double ) { tfinal double cosTheta = a . getQ0 ( ) * b . getQ0 ( ) + a . getQ1 ( ) * b . getQ1 ( ) + a . getQ2 ( ) * b . getQ2 ( ) + a . getQ3 ( ) * b . getQ3 ( ) ; tfinal double theta = Math . acos ( cosTheta ) ; tfinal double sinTheta = Math . sin ( theta ) ; tdouble w1 , w2 ; tif ( sinTheta > 0.001f ) { tw1 = Math . sin ( ( 1.0f - ) * theta ) / sinTheta ; tw2 = Math . sin ( * theta ) / sinTheta ; } else { tw1 = 1.0 - ; tw2 = ; } treturn new Rotation ( w1 * a . getQ0 ( ) + w2 * b . getQ0 ( ) , w1 * a . getQ1 ( ) + w2 * b . getQ1 ( ) , w1 * a . getQ2 ( ) + w2 * b . getQ2 ( ) , w1 * a . getQ3 ( ) + w2 
+tstatic public double smooth ( final double a , final double b , final double ) { tfinal double smooth = ( * * ( 3 - 2 * ) ) ; treturn ( b * smooth ) + ( a * ( 1 - smooth ) ) ; 
+tstatic public Vector3D smooth ( final Vector3D a , final Vector3D b , final double ) { treturn new Vector3D ( smooth ( a . getX ( ) , b . getX ( ) , ) , smooth ( a . getY ( ) , b . getY ( ) , ) , tsmooth ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
+tstatic public double linear ( final double a , final double b , final double ) { treturn a + ( b - a ) * ; } 
+tstatic public Vector3D linear ( final Vector3D a , final Vector3D b , final double ) { treturn new Vector3D ( linear ( a . getX ( ) , b . getX ( ) , ) , linear ( a . getY ( ) , b . getY ( ) , ) , tlinear ( a . getZ ( ) , b . getZ ( ) , ) ) ; 
+public void handleDrag ( final double dx , final double dy ) { tdampedPanX . impulse ( dx / 8. ) ; tdampedPanY . impulse ( dy / 8. ) ; } 
+public void handleDrag ( final double dx , final double dy ) { tmouseRotate ( dx , dy ) ; } 
+public void handleDrag ( final double dx , final double dy ) { tdampedZoom . impulse ( dy / 10.0 ) ; } 
+public void handleWheel ( final int delta ) { tdampedZoom . impulse ( delta ) ; } 
+tprotected void behave ( final double velocity ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , velocity ) ) ; } 
+tprotected void behave ( final double velocity ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , velocity ) ) ; } 
+tprotected void behave ( final double velocity ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , velocity ) ) ; } 
+tprotected void behave ( final double velocity ) { tmouseZoom ( velocity ) ; } 
+tprotected void behave ( final double velocity ) { tmousePan ( velocity , 0 ) ; } 
+tprotected void behave ( final double velocity ) { tmousePan ( 0 , velocity ) ; } 
+public String version ( ) { treturn VERSION ; } 
+public void mouseWheelMoved ( final MouseWheelEvent e ) { tif ( wheelHandler ! = null ) { twheelHandler . handleWheel ( e . getWheelRotation ( ) ) ; 
+private void mouseZoom ( final double delta ) { tsafeSetDistance ( distance + delta * Math . log1p ( distance ) ) ; } 
+private void mousePan ( final double dxMouse , final double dyMouse ) { tfinal double panScale = Math . sqrt ( distance * .005 ) ; tpan ( dragConstraint = = Constraint . Y ? 0 : - dxMouse * panScale , tdragConstraint = = Constraint . X ? 0 : - dyMouse * panScale ) ; 
+private void mouseRotate ( final double dx , final double dy ) { tfinal Vector3D u = LOOK . scalarMultiply ( 100 + .6 * startDistance ) . negate ( ) ; tif ( dragConstraint ! = Constraint . X ) { tfinal double rho = Math . abs ( ( p . width / 2d ) - p . mouseX ) / ( p . width / 2d ) ; tfinal double adz = Math . abs ( dy ) * rho ; tfinal double ady = Math . abs ( dy ) * ( 1 - rho ) ; tfinal int ySign = dy < 0 ? - 1 : 1 ; tfinal Vector3D vy = u . add ( new Vector3D ( 0 , ady , 0 ) ) ; trotateX . impulse ( Vector3D . angle ( u , vy ) * ySign ) ; tfinal Vector3D vz = u . add ( new Vector3D ( 0 , adz , 0 ) ) ; trotateZ . impulse ( Vector3D . angle ( u , vz ) * - ySign * ( p . mouseX < p . width / 2 ? - 1 : 1 ) ) ; } tif ( dragConstraint ! = Constraint . Y ) { tfinal double eccentricity = Math . abs ( ( p . height / 2d ) - p . mouseY ) 
+public void lookAt ( final double x , final double y , final double z ) { tcenterInterps . startInterpolation ( new CenterInterp ( new Vector3D ( x , y , z ) , 300 ) ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal double distance ) { tlookAt ( x , y , z ) ; tsetDistance ( distance ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal long animationTimeMillis ) { tlookAt ( x , y , z , distance , animationTimeMillis ) ; } 
+public void lookAt ( final double x , final double y , final double z , tfinal double distance , final long animationTimeMillis ) { tsetState ( new CameraState ( rotation , new Vector3D ( x , y , z ) , distance ) , tanimationTimeMillis ) ; 
+private void safeSetDistance ( final double distance ) { tthis . distance = Math . min ( maximumDistance , Math . max ( minimumDistance , distance ) ) ; tfeed ( ) ; } 
+public void feed ( ) { tfinal Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; tfinal Vector3D rup = rotation . applyTo ( UP ) ; tp . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , (float)center.getX(), (float)center.getY(), (float)center.getZ(), 
+tstatic void apply ( final PGraphics g , final Vector3D center , final Rotation rotation , tfinal double distance ) { tfinal Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; tfinal Vector3D rup = rotation . applyTo ( UP ) ; tg . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , (float)center.getX(), (float)center.getY(), (float)center.getZ(), 
+public void reset ( final long animationTimeInMillis ) { tsetState ( new CameraState ( new Rotation ( ) , startCenter , startDistance ) , tanimationTimeInMillis ) ; 
+public void pan ( final double dx , final double dy ) { tcenter = center . add ( rotation . applyTo ( new Vector3D ( dx , dy , 0 ) ) ) ; tfeed ( ) ; } 
+public void rotateX ( final double angle ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusI , angle ) ) ; tfeed ( ) ; } 
+public void rotateY ( final double angle ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusJ , angle ) ) ; tfeed ( ) ; } 
+public void rotateZ ( final double angle ) { trotation = rotation . applyTo ( new Rotation ( Vector3D . plusK , angle ) ) ; tfeed ( ) ; } 
+public void beginHUD ( ) { tp . pushMatrix ( ) ; tp . hint ( PConstants . DISABLE_DEPTH_TEST ) ; } 
+public void endHUD ( ) { tp . hint ( PConstants . ENABLE_DEPTH_TEST ) ; tp . popMatrix ( ) ; } 
+tvoid start ( ) { tstartTime = p . millis ( ) ; tp . registerDraw ( this ) ; } 
+tvoid cancel ( ) { tp . unregisterDraw ( this ) ; } 
+public void draw ( ) { tfinal double = ( p . millis ( ) - startTime ) / timeInMillis ; tif ( > .99 ) { tcancel ( ) ; tsetEndState ( ) ; } else { tinterp ( ) ; } tfeed ( ) ; } 
+tprotected void interp ( final double ) { tdistance = InterpolationUtil . smooth ( startDistance , endDistance , ) ; } 
+tprotected void interp ( final double ) { tcenter = InterpolationUtil . smooth ( startCenter , endCenter , ) ; } 
+tvoid start ( ) { trotateX . stop ( ) ; trotateY . stop ( ) ; trotateZ . stop ( ) ; tsuper . start ( ) ; } 
+tprotected void interp ( final double ) { trotation = InterpolationUtil . slerp ( startRotation , endRotation , ) ; } 
+private static String buildMessage ( final String pattern , final Object [ ] arguments , tfinal Locale locale ) { } 
+public void printStackTrace ( ) { tprintStackTrace ( System . err ) ; } 
+public void printStackTrace ( final PrintStream out ) { tsynchronized ( out ) { tfinal PrintWriter pw = new PrintWriter ( out , false ) ; 
+public void printStackTrace ( final PrintWriter out ) { tsynchronized ( out ) { tsuper . printStackTrace ( out ) ; 
+public Rotation revert ( ) { treturn new Rotation ( - q0 , q1 , q2 , q3 , false ) ; } 
+public double [ ] getAngles ( final RotationOrder order ) tthrows CardanEulerSingularityException { tif ( order = = RotationOrder . XYZ ) { 
+public Vector3D applyTo ( final Vector3D u ) { tfinal double x = u . getX ( ) ; tfinal double y = u . getY ( ) ; tfinal double z = u . getZ ( ) ; tfinal double s = q1 * x + q2 * y + q3 * z ; treturn new Vector3D ( 2 * ( q0 * ( x * q0 - ( q2 * z - q3 * y ) ) + s * q1 ) - x , 2 * ( q0 * ( y * q0 - ( q3 * x - q1 * z ) ) + s * q2 ) - y , 2 
+public Vector3D applyInverseTo ( final Vector3D u ) { tfinal double x = u . getX ( ) ; tfinal double y = u . getY ( ) ; tfinal double z = u . getZ ( ) ; tfinal double s = q1 * x + q2 * y + q3 * z ; tfinal double m0 = - q0 ; treturn new Vector3D ( 2 * ( m0 * ( x * m0 - ( q2 * z - q3 * y ) ) + s * q1 ) - x , 2 * ( m0 * ( y * m0 - ( q3 * x - q1 * z ) ) + s * q2 ) - y , 2 
+public Rotation applyTo ( final Rotation r ) { treturn new Rotation ( r . q0 * q0 - ( r . q1 * q1 + r . q2 * q2 + r . q3 * q3 ) , r . q1 * q0 + r . q0 * q1 + ( r . q2 * q3 - r . q3 * q2 ) , r . q2 * q0 + r . q0 * q2 
+public Rotation applyInverseTo ( final Rotation r ) { treturn new Rotation ( - r . q0 * q0 - ( r . q1 * q1 + r . q2 * q2 + r . q3 * q3 ) , - r . q1 * q0 + r . q0 * q1 + ( r . q2 * q3 - r . q3 * q2 ) , - r . q2 * q0 + r . q0 * q2 
+public String toString ( ) { treturn name ; } 
+public Vector3D add ( final Vector3D v ) { treturn new Vector3D ( x + v . x , y + v . y , z + v . z ) ; } 
+public Vector3D add ( final double factor , final Vector3D v ) { treturn new Vector3D ( x + factor * v . x , y + factor * v . y , z + factor * v . z ) ; } 
+public Vector3D subtract ( final Vector3D v ) { treturn new Vector3D ( x - v . x , y - v . y , z - v . z ) ; } 
+public Vector3D subtract ( final double factor , final Vector3D v ) { treturn new Vector3D ( x - factor * v . x , y - factor * v . y , z - factor * v . z ) ; } 
+public Vector3D normalize ( ) { tfinal double s = getNorm ( ) ; tif ( s = = 0 ) { tthrow new ArithmeticException ( " cannot normalize a zero norm vector " ) ; } treturn scalarMultiply ( 1 / s ) ; } 
+public Vector3D orthogonal ( ) { tfinal double threshold = 0.6 * getNorm ( ) ; tif ( threshold = = 0 ) { tthrow new ArithmeticException ( " null norm " ) ; } tif ( ( x > = - threshold ) & & ( x < = threshold ) ) { tfinal double inverse = 1 / Math . sqrt ( y * y + z * z ) ; treturn new Vector3D ( 0 , inverse * z , - inverse * y ) ; } else if ( ( y > = - threshold ) & & ( y < = threshold ) ) { tfinal double inverse = 1 / Math . sqrt ( x * x + z * z ) ; treturn new Vector3D ( - inverse * z , 0 , inverse * x ) ; } tfinal double inverse = 1 / Math . sqrt ( x * x + y * y ) ; treturn new Vector3D ( inverse * y , - inverse * x , 0 ) ; 
+public static double angle ( final Vector3D v1 , final Vector3D v2 ) { tfinal double normProduct = v1 . getNorm ( ) * v2 . getNorm ( ) ; tif ( normProduct = = 0 ) { tthrow new ArithmeticException ( " null norm " ) ; } tfinal double dot = dotProduct ( v1 , v2 ) ; tfinal double threshold = normProduct * 0.9999 ; tif ( ( dot < - threshold ) | | ( dot > threshold ) ) { return Math.acos(dot / normProduct); 
+public Vector3D negate ( ) { treturn new Vector3D ( - x , - y , - z ) ; } 
+public Vector3D scalarMultiply ( final double a ) { treturn new Vector3D ( a * x , a * y , a * z ) ; } 
+public static double dotProduct ( final Vector3D v1 , final Vector3D v2 ) { treturn v1 . x * v2 . x + v1 . y * v2 . y + v1 . z * v2 . z ; } 
+public static Vector3D crossProduct ( final Vector3D v1 , final Vector3D v2 ) { treturn new Vector3D ( v1 . y * v2 . z - v1 . z * v2 . y , v1 . z * v2 . x - v1 . x * v2 . z , v1 . x * v2 . y - v1 . y * v2 . x ) ; 
+public void setup ( ) { tsize ( 200 , 200 , P3D ) ; tcam = new PeasyCam ( this , 100 ) ; tcam . setMinimumDistance ( 50 ) ; tcam . setMaximumDistance ( 500 ) ; } 
+public void draw ( ) { trotateX ( - .5f ) ; trotateY ( - .5f ) ; tbackground ( 0 ) ; tfill ( 255 , 0 , 0 ) ; tbox ( 30 ) ; tpushMatrix ( ) ; ttranslate ( 0 , 0 , 20 ) ; tfill ( 0 , 0 , 255 ) ; tbox ( 5 ) ; tpopMatrix ( ) ; } 
+public void handleWheel ( final int delta ) { tdampedZoom . impulse ( wheelScale * delta ) ; } 
+public void setup ( ) { tsize ( 200 , 200 , P3D ) ; tcam = new PeasyCam ( this , 100 ) ; tcam . setMinimumDistance ( 50 ) ; tcam . setMaximumDistance ( 500 ) ; tcam . setWheelScale ( 4.0 ) ; } 
+public void keyPressed ( ) { tcam . setActive ( key = = 'a' ) ; } 
+public boolean isActive ( ) { treturn isActive ; } 
+tstatic public Rotation slerp ( final Rotation a , final Rotation b , final double ) { tfinal double a0 = a . getQ0 ( ) , a1 = a . getQ1 ( ) , a2 = a . getQ2 ( ) , a3 = a . getQ3 ( ) ; tdouble b0 = b . getQ0 ( ) , b1 = b . getQ1 ( ) , b2 = b . getQ2 ( ) , b3 = b . getQ3 ( ) ; tdouble cosTheta = a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3 ; tif ( cosTheta < 0 ) { tb0 = - b0 ; tb1 = - b1 ; tb2 = - b2 ; tb3 = - b3 ; tcosTheta = - cosTheta ; } tfinal double theta = Math . acos ( cosTheta ) ; tfinal double sinTheta = Math . sqrt ( 1.0 - cosTheta * cosTheta ) ; tdouble w1 , w2 ; tif ( sinTheta > 0.001 ) { tw1 = Math . sin ( ( 1.0 - ) * theta ) / sinTheta ; tw2 = Math . sin ( * theta ) / sinTheta ; } else { tw1 = 1.0 - ; tw2 = ; } treturn new Rotation ( w1 * a0 + w2 * b0 , w1 * a1 + w2 * b1 , w1 * a2 + w2 * b2 , w1 * a3 + w2 * b3 , true ) ; 
+private void mousePan ( final double dxMouse , final double dyMouse ) { tfinal double panScale = Math . sqrt ( distance * .005 ) ; tpan ( dragConstraint = = Constraint . PITCH ? 0 : - dxMouse * panScale , tdragConstraint = = Constraint . YAW ? 0 : - dyMouse * panScale ) ; 
+public void keyEvent ( final KeyEvent e ) { tif ( e . getAction ( ) = = KeyEvent . RELEASE & & e . isShiftDown ( ) ) tdragConstraint = null ; 
+tvoid start ( ) { tstartTime = p . millis ( ) ; tp . registerMethod ( " draw " , this ) ; } 
+tvoid cancel ( ) { tp . unregisterMethod ( " draw " , this ) ; } 
+public void keyPressed ( ) { tcam . setActive ( key = = 'a' ) ; } 
+tvoid start ( ) { tstartTime = parent . millis ( ) ; tparent . registerMethod ( " draw " , this ) ; } 
+tvoid cancel ( ) { tparent . unregisterMethod ( " draw " , this ) ; } 
+public void draw ( ) { tfinal double = ( parent . millis ( ) - startTime ) / timeInMillis ; tif ( > .99 ) { tcancel ( ) ; tsetEndState ( ) ; } else { tinterp ( ) ; } tfeed ( ) ; } 
+public void feed ( ) { tfinal Vector3D pos = rotation . applyTo ( LOOK ) . scalarMultiply ( distance ) . add ( center ) ; tfinal Vector3D rup = rotation . applyTo ( UP ) ; tg . camera ( ( float ) pos . getX ( ) , ( float ) pos . getY ( ) , ( float ) pos . getZ ( ) , (float)center.getX(), (float)center.getY(), (float)center.getZ(), 
+public void beginHUD ( ) { tg . pushMatrix ( ) ; tg . hint ( PConstants . DISABLE_DEPTH_TEST ) ; } 
+public void endHUD ( ) { tg . hint ( PConstants . ENABLE_DEPTH_TEST ) ; tg . popMatrix ( ) ; } 
 public void beginHUD ( ) { g.ortho(0, g.width, -g.height, 0, 0, 1); 
 public void endHUD ( ) { } 
 public void settings ( ) { size ( 800 , 600 , P3D ) ; smooth ( 8 ) ; } 
@@ -245,42 +245,42 @@ public void beginHUD ( ) { g.ortho(0, g.width, -g.height, 0, 0, 1);
 public void beginHUD ( ) { g.ortho(0, g.width, -g.height, 0, 0, 1); 
 public void endHUD ( ) { g.popStyle(); 
 public void draw ( ) { ambientLight(128, 128, 128); pointLight(255, 128, 64, -200, -200, 10); pointLight(64, 128, 255, +200, +200, 10); background(16); rectMode(CENTER); strokeWeight(1); stroke(0); fill(128); rect(0, 0, 400, 400); strokeWeight(2); stroke(255, 64, 0); line(0,0,0,100,0,0); stroke( 32,255, 32); line(0,0,0,0,100,0); stroke( 0, 64,255); line(0,0,0,0,0,100); translate(80,80,80); noStroke(); fill(128); box(50); screen-aligned 2D HUD peasycam.beginHUD(); image(pg_screen, 0, 0); peasycam.endHUD(); 
-public void beginHUD ( ) { g . hint ( PConstants . DISABLE_DEPTH_TEST ) ; g . pushMatrix ( ) ; g . resetMatrix ( ) ; if ( g . isGL ( ) ) { PGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; pgl . pushProjection ( ) ; pushed_lights = pgl . lights ; pgl . lights = false ; } if ( g . is3D ( ) ) { g . ortho ( 0 , g . width , - g . height , 0 , - Float . MAX_VALUE , + Float . MAX_VALUE ) ; 
-public void endHUD ( ) { if ( g . isGL ( ) ) { PGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; pgl . popProjection ( ) ; pgl . lights = pushed_lights ; pushed_lights = false ; } g . popMatrix ( ) ; g . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
+public void beginHUD ( ) { tg . hint ( PConstants . DISABLE_DEPTH_TEST ) ; tg . pushMatrix ( ) ; tg . resetMatrix ( ) ; tif ( g . isGL ( ) ) { tPGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; tpgl . pushProjection ( ) ; tpushed_lights = pgl . lights ; tpgl . lights = false ; } tif ( g . is3D ( ) ) { tg . ortho ( 0 , g . width , - g . height , 0 , - Float . MAX_VALUE , + Float . MAX_VALUE ) ; 
+public void endHUD ( ) { tif ( g . isGL ( ) ) { tPGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; tpgl . popProjection ( ) ; tpgl . lights = pushed_lights ; tpushed_lights = false ; } tg . popMatrix ( ) ; tg . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
 public void setup ( ) { surface.setResizable(true); default FoV is 60 perspective(90 * DEG_TO_RAD, width/(float)height, 1, 5000); camera peasycam = new PeasyCam(this, 300); } 
-public void beginHUD ( ) { g . hint ( PConstants . DISABLE_DEPTH_TEST ) ; g . pushMatrix ( ) ; g . resetMatrix ( ) ; if ( g . isGL ( ) ) { PGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; pgl . pushProjection ( ) ; pushedLights = pgl . lights ; pgl . lights = false ; } if ( g . is3D ( ) ) { g . ortho ( 0 , g . width , - g . height , 0 , - Float . MAX_VALUE , + Float . MAX_VALUE ) ; 
-public void endHUD ( ) { if ( g . isGL ( ) ) { PGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; pgl . popProjection ( ) ; pgl . lights = pushedLights ; } g . popMatrix ( ) ; g . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
-public void beginHUD ( ) { g . hint ( PConstants . DISABLE_DEPTH_TEST ) ; g . pushMatrix ( ) ; g . resetMatrix ( ) ; PGraphicsOpenGL pgl = (PGraphicsOpenGL)g; 
-public void endHUD ( ) { if ( g . isGL ( ) & & g . is3D ( ) ) { PGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; pgl . popProjection ( ) ; pgl . lights = pushedLights ; } g . popMatrix ( ) ; g . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
-public boolean insideViewport ( double x , double y ) { float x0 = viewport [ 0 ] , x1 = x0 + viewport [ 2 ] ; float y0 = viewport [ 1 ] , y1 = y0 + viewport [ 3 ] ; return ( x > x0 ) & & ( x < x1 ) & & ( y > y0 ) & & ( y < y1 ) ; } 
+public void beginHUD ( ) { tg . hint ( PConstants . DISABLE_DEPTH_TEST ) ; tg . pushMatrix ( ) ; tg . resetMatrix ( ) ; tif ( g . isGL ( ) ) { tPGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; tpgl . pushProjection ( ) ; tpushedLights = pgl . lights ; tpgl . lights = false ; } tif ( g . is3D ( ) ) { tg . ortho ( 0 , g . width , - g . height , 0 , - Float . MAX_VALUE , + Float . MAX_VALUE ) ; 
+public void endHUD ( ) { tif ( g . isGL ( ) ) { tPGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; tpgl . popProjection ( ) ; tpgl . lights = pushedLights ; } tg . popMatrix ( ) ; tg . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
+public void beginHUD ( ) { tg . hint ( PConstants . DISABLE_DEPTH_TEST ) ; tg . pushMatrix ( ) ; tg . resetMatrix ( ) ; PGraphicsOpenGL pgl = (PGraphicsOpenGL)g; 
+public void endHUD ( ) { tif ( g . isGL ( ) & & g . is3D ( ) ) { tPGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; tpgl . popProjection ( ) ; tpgl . lights = pushedLights ; } tg . popMatrix ( ) ; tg . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
+public boolean insideViewport ( double x , double y ) { tfloat x0 = viewport [ 0 ] , x1 = x0 + viewport [ 2 ] ; tfloat y0 = viewport [ 1 ] , y1 = y0 + viewport [ 3 ] ; treturn ( x > x0 ) & & ( x < x1 ) & & ( y > y0 ) & & ( y < y1 ) ; } 
 private void mouseZoom ( final double delta ) { } 
 private void mousePan ( final double dxMouse , final double dyMouse ) { dragConstraint == Constraint.YAW ? 0 : -dyMouse * panScale); 
-public void beginHUD ( ) { g . hint ( PConstants . DISABLE_DEPTH_TEST ) ; g . pushMatrix ( ) ; g . resetMatrix ( ) ; PGraphicsOpenGL pgl = (PGraphicsOpenGL)g; 
-public void endHUD ( ) { if ( g . isGL ( ) & & g . is3D ( ) ) { PGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; pgl . popProjection ( ) ; pgl . lights = pushedLights ; } g . popMatrix ( ) ; g . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
-public void settings ( ) { size ( 800 , 600 , P3D ) ; } 
-public void setup ( ) { cam = new PeasyCam ( his , 400 ) ; state = cam . getState ( ) ; } 
-public void draw ( ) { rotateX ( - .5f ) ; rotateY ( - .5f ) ; lights ( ) ; scale ( 10 ) ; strokeWeight ( 1 / 10 f ) ; background ( 0 ) ; fill ( 220 , 255 , 0 ) ; box ( 30 ) ; pushMatrix ( ) ; translate ( 0 , 0 , 20 ) ; fill ( 0 , 96 , 255 ) ; box ( 5 ) ; popMatrix ( ) ; } 
-public void keyReleased ( ) { if ( key = = '1' ) state = cam . getState ( ) ; if ( key = = '2' ) cam . setState ( state , 1000 ) ; 
-public static void main ( String args [ ] ) { PApplet . main ( new String [ ] { CameraStates . class . getName ( ) } ) ; } 
-public void settings ( ) { size ( 800 , 600 , P3D ) ; smooth ( 8 ) ; } 
-public void setup ( ) { cam = new PeasyCam ( his , 400 ) ; } 
-public void draw ( ) { rotateX ( - .5f ) ; rotateY ( - .5f ) ; lights ( ) ; scale ( 10 ) ; strokeWeight ( 1 / 10 f ) ; background ( 0 ) ; fill ( 96 , 255 , 0 ) ; box ( 30 ) ; pushMatrix ( ) ; translate ( 0 , 0 , 20 ) ; fill ( 0 , 96 , 255 ) ; box ( 5 ) ; popMatrix ( ) ; cam . beginHUD ( ) ; fill ( 0 , 128 ) ; rect ( 0 , 0 , 70 , 30 ) ; fill ( 255 ) ; text ( " " + nfc ( frameRate , 2 ) , 10 , 18 ) ; cam . endHUD ( ) ; } 
-public static void main ( String args [ ] ) { PApplet . main ( new String [ ] { HeadUpDisplay . class . getName ( ) } ) ; } 
-public void draw ( ) { rotateX ( - .5f ) ; rotateY ( - .5f ) ; lights ( ) ; scale ( 10 ) ; strokeWeight ( 1 / 10 f ) ; background ( 0 ) ; fill ( 255 , 0 , 0 ) ; box ( 30 ) ; pushMatrix ( ) ; translate ( 0 , 0 , 20 ) ; fill ( 0 , 0 , 255 ) ; box ( 5 ) ; popMatrix ( ) ; } 
-public static void main ( String args [ ] ) { PApplet . main ( new String [ ] { HelloPeasy . class . getName ( ) } ) ; } 
-public void settings ( ) { size ( 1280 , 720 , P2D ) ; } 
-public void setup ( ) { int gap = 5 ; for (int x = 0; x < NX; x++) { 
+public void beginHUD ( ) { tg . hint ( PConstants . DISABLE_DEPTH_TEST ) ; tg . pushMatrix ( ) ; tg . resetMatrix ( ) ; PGraphicsOpenGL pgl = (PGraphicsOpenGL)g; 
+public void endHUD ( ) { tif ( g . isGL ( ) & & g . is3D ( ) ) { tPGraphicsOpenGL pgl = ( PGraphicsOpenGL ) g ; tpgl . popProjection ( ) ; tpgl . lights = pushedLights ; } tg . popMatrix ( ) ; tg . hint ( PConstants . ENABLE_DEPTH_TEST ) ; } 
+public void settings ( ) { tsize ( 800 , 600 , P3D ) ; } 
+public void setup ( ) { tcam = new PeasyCam ( this , 400 ) ; tstate = cam . getState ( ) ; } 
+public void draw ( ) { trotateX ( - .5f ) ; trotateY ( - .5f ) ; tlights ( ) ; tscale ( 10 ) ; tstrokeWeight ( 1 / 10 f ) ; tbackground ( 0 ) ; tfill ( 220 , 255 , 0 ) ; tbox ( 30 ) ; tpushMatrix ( ) ; ttranslate ( 0 , 0 , 20 ) ; tfill ( 0 , 96 , 255 ) ; tbox ( 5 ) ; tpopMatrix ( ) ; } 
+public void keyReleased ( ) { tif ( key = = '1' ) tstate = cam . getState ( ) ; tif ( key = = '2' ) tcam . setState ( state , 1000 ) ; 
+public static void main ( String args [ ] ) { tPApplet . main ( new String [ ] { CameraStates . class . getName ( ) } ) ; } 
+public void settings ( ) { tsize ( 800 , 600 , P3D ) ; tsmooth ( 8 ) ; } 
+public void setup ( ) { tcam = new PeasyCam ( this , 400 ) ; } 
+public void draw ( ) { trotateX ( - .5f ) ; trotateY ( - .5f ) ; tlights ( ) ; tscale ( 10 ) ; tstrokeWeight ( 1 / 10 f ) ; tbackground ( 0 ) ; tfill ( 96 , 255 , 0 ) ; tbox ( 30 ) ; tpushMatrix ( ) ; ttranslate ( 0 , 0 , 20 ) ; tfill ( 0 , 96 , 255 ) ; tbox ( 5 ) ; tpopMatrix ( ) ; tcam . beginHUD ( ) ; tfill ( 0 , 128 ) ; trect ( 0 , 0 , 70 , 30 ) ; tfill ( 255 ) ; ttext ( " " + nfc ( frameRate , 2 ) , 10 , 18 ) ; tcam . endHUD ( ) ; } 
+public static void main ( String args [ ] ) { tPApplet . main ( new String [ ] { HeadUpDisplay . class . getName ( ) } ) ; } 
+public void draw ( ) { trotateX ( - .5f ) ; trotateY ( - .5f ) ; tlights ( ) ; tscale ( 10 ) ; tstrokeWeight ( 1 / 10 f ) ; tbackground ( 0 ) ; tfill ( 255 , 0 , 0 ) ; tbox ( 30 ) ; tpushMatrix ( ) ; ttranslate ( 0 , 0 , 20 ) ; tfill ( 0 , 0 , 255 ) ; tbox ( 5 ) ; tpopMatrix ( ) ; } 
+public static void main ( String args [ ] ) { tPApplet . main ( new String [ ] { HelloPeasy . class . getName ( ) } ) ; } 
+public void settings ( ) { tsize ( 1280 , 720 , P2D ) ; } 
+public void setup ( ) { tint gap = 5 ; for (int x = 0; x < NX; x++) { 
 public void draw ( ) { int[] viewport = cameras[i].getViewport(); 
-public static void main ( String args [ ] ) { PApplet . main ( new String [ ] { MultiView_Offscreen . class . getName ( ) } ) ; } 
-public void settings ( ) { size ( 1280 , 720 , P3D ) ; } 
+public static void main ( String args [ ] ) { tPApplet . main ( new String [ ] { MultiView_Offscreen . class . getName ( ) } ) ; } 
+public void settings ( ) { tsize ( 1280 , 720 , P3D ) ; } 
 public void draw ( ) { pushStyle(); 
-public static void main ( String args [ ] ) { PApplet . main ( new String [ ] { MultiView_Onscreen . class . getName ( ) } ) ; } 
-private void mouseZoom ( final double delta ) { double new_distance = distance + delta * distance * 0.02 ; if ( new_distance < minimumDistance ) { new_distance = minimumDistance ; dampedZoom . stop ( ) ; } if ( new_distance > maximumDistance ) { new_distance = maximumDistance ; dampedZoom . stop ( ) ; } safeSetDistance ( new_distance ) ; } 
-private void mousePan ( final double dxMouse , final double dyMouse ) { final double panScale = distance * 0.0025 ; pan ( dragConstraint = = Constraint . PITCH ? 0 : - dxMouse * panScale , dragConstraint = = Constraint . YAW ? 0 : - dyMouse * panScale ) ; 
-public void setup ( ) { surface . setResizable ( rue ) ; cam = new PeasyCam ( his , 400 ) ; } 
-public void handleResize ( ) { cam . setViewport ( 0 , 0 , width , height ) ; cam . feed ( ) ; } 
-public void draw ( ) { handleResize ( ) ; perspective ( 60 * DEG_TO_RAD , width / ( float ) height , 1 , 20000 ) ; rotateX ( - .5f ) ; rotateY ( - .5f ) ; lights ( ) ; scale ( 10 ) ; strokeWeight ( 1 / 10 f ) ; background ( 0 ) ; fill ( 96 , 255 , 0 ) ; box ( 30 ) ; pushMatrix ( ) ; translate ( 0 , 0 , 20 ) ; fill ( 0 , 96 , 255 ) ; box ( 5 ) ; popMatrix ( ) ; cam . beginHUD ( ) ; fill ( 0 , 128 ) ; rect ( 0 , 0 , 70 , 30 ) ; fill ( 255 ) ; text ( " " + nfc ( frameRate , 2 ) , 10 , 18 ) ; cam . endHUD ( ) ; } 
-public static void main ( String args [ ] ) { PApplet . main ( new String [ ] { Resizeable . class . getName ( ) } ) ; } 
-public void settings ( ) { size ( 800 , 600 , P2D ) ; smooth ( 8 ) ; } 
-public void setup ( ) { surface . setResizable ( rue ) ; int w = 2 * width / 3 - 10 ; int h = height - 20 ; pg = ( PGraphics3D ) createGraphics ( w , h , P3D ) ; cam = new PeasyCam ( his , pg , 400 ) ; } 
-public static void main ( String args [ ] ) { PApplet . main ( new String [ ] { Resizeable_Offscreen . class . getName ( ) } ) ; } 
+public static void main ( String args [ ] ) { tPApplet . main ( new String [ ] { MultiView_Onscreen . class . getName ( ) } ) ; } 
+private void mouseZoom ( final double delta ) { tdouble new_distance = distance + delta * distance * 0.02 ; tif ( new_distance < minimumDistance ) { tnew_distance = minimumDistance ; tdampedZoom . stop ( ) ; } tif ( new_distance > maximumDistance ) { tnew_distance = maximumDistance ; tdampedZoom . stop ( ) ; } tsafeSetDistance ( new_distance ) ; } 
+private void mousePan ( final double dxMouse , final double dyMouse ) { tfinal double panScale = distance * 0.0025 ; tpan ( dragConstraint = = Constraint . PITCH ? 0 : - dxMouse * panScale , tdragConstraint = = Constraint . YAW ? 0 : - dyMouse * panScale ) ; 
+public void setup ( ) { tsurface . setResizable ( true ) ; tcam = new PeasyCam ( this , 400 ) ; } 
+public void handleResize ( ) { tcam . setViewport ( 0 , 0 , width , height ) ; tcam . feed ( ) ; } 
+public void draw ( ) { thandleResize ( ) ; tperspective ( 60 * DEG_TO_RAD , width / ( float ) height , 1 , 20000 ) ; trotateX ( - .5f ) ; trotateY ( - .5f ) ; tlights ( ) ; tscale ( 10 ) ; tstrokeWeight ( 1 / 10 f ) ; tbackground ( 0 ) ; tfill ( 96 , 255 , 0 ) ; tbox ( 30 ) ; tpushMatrix ( ) ; ttranslate ( 0 , 0 , 20 ) ; tfill ( 0 , 96 , 255 ) ; tbox ( 5 ) ; tpopMatrix ( ) ; tcam . beginHUD ( ) ; tfill ( 0 , 128 ) ; trect ( 0 , 0 , 70 , 30 ) ; tfill ( 255 ) ; ttext ( " " + nfc ( frameRate , 2 ) , 10 , 18 ) ; tcam . endHUD ( ) ; } 
+public static void main ( String args [ ] ) { tPApplet . main ( new String [ ] { Resizeable . class . getName ( ) } ) ; } 
+public void settings ( ) { tsize ( 800 , 600 , P2D ) ; tsmooth ( 8 ) ; } 
+public void setup ( ) { tsurface . setResizable ( true ) ; tint w = 2 * width / 3 - 10 ; tint h = height - 20 ; tpg = ( PGraphics3D ) createGraphics ( w , h , P3D ) ; tcam = new PeasyCam ( this , pg , 400 ) ; } 
+public static void main ( String args [ ] ) { tPApplet . main ( new String [ ] { Resizeable_Offscreen . class . getName ( ) } ) ; } 
